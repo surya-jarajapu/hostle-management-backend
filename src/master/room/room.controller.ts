@@ -22,8 +22,7 @@ import {
   stringOptional,
 } from 'src/global_utils/zod/zod_utils';
 import { BaseQuerySchema } from 'src/global_utils/zod/zod_base_schema';
-import { Status } from '@prisma/client';
-import { MasterRole } from 'prisma/generated';
+import { MasterRole, Status } from 'prisma/generated';
 import { Roles } from 'src/auth/roles.decorator';
 import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 

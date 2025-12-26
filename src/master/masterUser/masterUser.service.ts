@@ -28,7 +28,8 @@ import { PAGING } from 'src/global_utils/EnumsBase';
 
 import { PrismaPostgrePBService } from 'src/prisma/prisma_postgre_rpt.service';
 import { MasterUserDTO, MasterUserQueryDTO } from './masterUser.controller';
-import { Role } from '@prisma/client';
+
+
 
 const name = `MasterUser`;
 
