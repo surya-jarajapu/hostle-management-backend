@@ -202,6 +202,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -228,8 +232,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_DATABASE_URL\")\n}\n\nenum PaymentStatus {\n  NONE\n  PENDING\n  APPROVED\n}\n\nenum Status {\n  Active\n  Inactive\n}\n\nenum MasterRole {\n  ADMIN\n  SUPERVISOR\n  STAFF\n}\n\nmodel Hostel {\n  hostel_id String  @id @default(uuid())\n  name      String  @unique // 👈 IMPORTANT\n  address   String?\n\n  added_date_time DateTime @default(now())\n\n  users       User[]\n  rooms       Room[]\n  masterUsers MasterUser[]\n\n  @@map(\"hostel\") // MUST BE HERE\n}\n\nmodel MasterUser {\n  master_user_id String     @id @default(uuid())\n  name           String\n  email          String     @unique // 👈 ADD THIS\n  mobile         String\n  password       String\n  role           MasterRole @default(ADMIN)\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel User {\n  user_id    String  @id @default(uuid())\n  user_name  String\n  email      String?\n  mobile     String\n  user_image String?\n\n  joining_date  DateTime  @default(now())\n  next_fee_date DateTime?\n  monthly_fee   Int\n  due_amount    Int\n\n  room_id String?\n  room    Room?   @relation(fields: [room_id], references: [room_id])\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  user_fee_receipt String?\n  payment_status   PaymentStatus @default(NONE)\n\n  status             Status   @default(Active)\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel Room {\n  room_id      String  @id @default(uuid())\n  floor_number String?\n  room_number  String\n  total_beds   Int\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  users User[]\n\n  status     Status   @default(Active)\n  addedAt    DateTime @default(now())\n  modifiedAt DateTime @updatedAt\n\n  @@unique([hostel_id, room_number])\n}\n",
-  "inlineSchemaHash": "3c4f1d6ec239dbfe5a2d69d5ab50253533df8a37dcb01deb0a1d08333bcdf601",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum PaymentStatus {\n  NONE\n  PENDING\n  APPROVED\n}\n\nenum Status {\n  Active\n  Inactive\n}\n\nenum MasterRole {\n  ADMIN\n  SUPERVISOR\n  STAFF\n}\n\nmodel Hostel {\n  hostel_id String  @id @default(uuid())\n  name      String  @unique // 👈 IMPORTANT\n  address   String?\n\n  added_date_time DateTime @default(now())\n\n  users       User[]\n  rooms       Room[]\n  masterUsers MasterUser[]\n\n  @@map(\"hostel\") // MUST BE HERE\n}\n\nmodel MasterUser {\n  master_user_id String     @id @default(uuid())\n  name           String\n  email          String     @unique // 👈 ADD THIS\n  mobile         String\n  password       String\n  role           MasterRole @default(ADMIN)\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel User {\n  user_id    String  @id @default(uuid())\n  user_name  String\n  email      String?\n  mobile     String\n  user_image String?\n\n  joining_date  DateTime  @default(now())\n  next_fee_date DateTime?\n  monthly_fee   Int\n  due_amount    Int\n\n  room_id String?\n  room    Room?   @relation(fields: [room_id], references: [room_id])\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  user_fee_receipt String?\n  payment_status   PaymentStatus @default(NONE)\n\n  status             Status   @default(Active)\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel Room {\n  room_id      String  @id @default(uuid())\n  floor_number String?\n  room_number  String\n  total_beds   Int\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  users User[]\n\n  status     Status   @default(Active)\n  addedAt    DateTime @default(now())\n  modifiedAt DateTime @updatedAt\n\n  @@unique([hostel_id, room_number])\n}\n",
+  "inlineSchemaHash": "b2024075f598dec1d511a187c88892c0402eade5e3d181f8ee17e8132f707a95",
   "copyEngine": true
 }
 
@@ -270,6 +274,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "prisma/generated/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/generated/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/schema.prisma")
