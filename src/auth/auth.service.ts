@@ -69,9 +69,7 @@ export class AuthService {
 
 async login(dto: any) {
   const masterUser = await this.prisma.masterUser.findUnique({
-    where: {
-      email: dto.email,
-    },
+    where: { email: dto.email },
     include: {
       hostel: {
         select: { hostel_id: true, name: true },
@@ -79,17 +77,14 @@ async login(dto: any) {
     },
   });
 
-  if (!masterUser) {
+  if (!masterUser)
     throw new UnauthorizedException('Invalid email or password');
-  }
 
-  // ✅ CASE-SENSITIVE PASSWORD CHECK
-  if (dto.password !== masterUser.password) {
+  if (dto.password !== masterUser.password)
     throw new UnauthorizedException('Invalid email or password');
-  }
 
   if (!process.env.JWT_SECRET) {
-    throw new Error('JWT_SECRET is not configured');
+    throw new Error('JWT_SECRET is not set');
   }
 
   const token = this.jwt.sign(
@@ -114,7 +109,6 @@ async login(dto: any) {
     },
   };
 }
-
 
 
   async validate(payload: any) {
