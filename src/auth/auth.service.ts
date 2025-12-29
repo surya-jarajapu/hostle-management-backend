@@ -67,47 +67,55 @@ export class AuthService {
     }
   }
 
-  async login(dto: any) {
-    const masterUser = await this.prisma.masterUser.findUnique({
-      where: {
-        email: dto.email, // ✅ NOW VALID
+async login(dto: any) {
+  const masterUser = await this.prisma.masterUser.findUnique({
+    where: {
+      email: dto.email,
+    },
+    include: {
+      hostel: {
+        select: { hostel_id: true, name: true },
       },
-      include: {
-        hostel: {
-          select: { hostel_id: true, name: true },
-        },
-      },
-    });
+    },
+  });
 
-    if (!masterUser)
-      throw new UnauthorizedException('Invalid email or password');
-
-    if (dto.password !== masterUser.password)
-      throw new UnauthorizedException('Invalid email or password');
-
-    // ✅ hostel_id ALWAYS comes from DB
-const token = this.jwt.sign(
-  {
-    master_user_id: masterUser.master_user_id,
-    role: masterUser.role,
-    hostel_id: masterUser.hostel_id,
-  },
-  {
-    secret: process.env.JWT_SECRET || 'SECRET123',
-  },
-);
-
-    
-    const { password, ...safe } = masterUser;
-    return {
-      status: true,
-      message: 'Login successful',
-      data: {
-        token,
-        masterUser: safe,
-      },
-    };
+  if (!masterUser) {
+    throw new UnauthorizedException('Invalid email or password');
   }
+
+  // ✅ CASE-SENSITIVE PASSWORD CHECK
+  if (dto.password !== masterUser.password) {
+    throw new UnauthorizedException('Invalid email or password');
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured');
+  }
+
+  const token = this.jwt.sign(
+    {
+      master_user_id: masterUser.master_user_id,
+      role: masterUser.role,
+      hostel_id: masterUser.hostel.hostel_id, // ✅ FIXED
+    },
+    {
+      secret: process.env.JWT_SECRET,
+    },
+  );
+
+  const { password, ...safe } = masterUser;
+
+  return {
+    status: true,
+    message: 'Login successful',
+    data: {
+      token,
+      masterUser: safe,
+    },
+  };
+}
+
+
 
   async validate(payload: any) {
     console.log('JWT PAYLOAD:', payload);

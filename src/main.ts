@@ -13,6 +13,8 @@ import compression from '@fastify/compress';
 import fastifyCors from '@fastify/cors';
 import * as dotenv from 'dotenv';
 
+
+
 async function bootstrap() {
   dotenv.config(); // 🔥 REQUIRED
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -31,6 +33,7 @@ async function bootstrap() {
     methods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
+  
 
   // Compression
   await app.register(compression);
