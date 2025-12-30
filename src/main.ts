@@ -24,13 +24,14 @@ async function bootstrap() {
 
   // CORS (frontend connection)
   await app.register(cors, {
-    origin: [
-      'http://localhost:3000',
-      'https://your-frontend.vercel.app',
-    ],
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  });
+  origin: [
+    'http://localhost:3000',
+    'https://hostel-management-lovat.vercel.app',
+  ],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+});
+
 
   // Compression
   await app.register(compression);
