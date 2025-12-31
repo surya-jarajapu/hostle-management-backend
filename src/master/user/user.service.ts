@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-
 import {
   BR,
   DBR,
@@ -13,7 +12,6 @@ import {
   successDBR,
   successFBR,
 } from 'src/global_utils/BaseResponse';
-
 
 import { Prisma } from 'prisma/generated';
 import { calculateDelayDays } from 'src/global_utils/delaydays/calculateDelayDays ';
@@ -190,9 +188,9 @@ export class UserService {
   // -----------------------------------------
   // FIND USERS (HOSTEL ISOLATED)
   // -----------------------------------------
- // -----------------------------------------
-// FIND USERS (HOSTEL ISOLATED)
-// -----------------------------------------
+  // -----------------------------------------
+  // FIND USERS (HOSTEL ISOLATED)
+  // -----------------------------------------
 async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
   try {
     const where: Prisma.UserWhereInput = {
@@ -222,11 +220,8 @@ async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
 
     const total = await this.prisma.user.count({ where });
 
-    const take =
-      dto.paging === PAGING.Yes ? dto.page_count : total;
-
-    const skip =
-      dto.paging === PAGING.Yes ? dto.page_index * take : 0;
+    const take = dto.paging === PAGING.Yes ? dto.page_count : total;
+    const skip = dto.paging === PAGING.Yes ? dto.page_index * take : 0;
 
     const rows = await this.prisma.user.findMany({
       where,
@@ -239,9 +234,36 @@ async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
           },
         },
       },
-      orderBy: { added_date_time: 'desc' },
       take,
       skip,
+    });
+
+    /** ✅ 1️⃣ add delay_days */
+    const rowsWithDelay = rows.map((r) => ({
+      ...r,
+      delay_days: calculateDelayDays(r.next_fee_date),
+    }));
+
+    /** ✅ 2️⃣ sort overdue first */
+    rowsWithDelay.sort((a, b) => {
+      const aOverdue = a.delay_days > 0;
+      const bOverdue = b.delay_days > 0;
+
+      // 🔴 overdue users first
+      if (aOverdue !== bOverdue) {
+        return aOverdue ? -1 : 1;
+      }
+
+      // ⏱ higher delay first
+      if (a.delay_days !== b.delay_days) {
+        return b.delay_days - a.delay_days;
+      }
+
+      // 📅 newest first (fallback)
+      return (
+        new Date(b.added_date_time).getTime() -
+        new Date(a.added_date_time).getTime()
+      );
     });
 
     return successFBR(
@@ -249,10 +271,7 @@ async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
       take,
       skip,
       dto.page_index,
-      rows.map((r) => ({
-        ...r,
-        delay_days: calculateDelayDays(r.next_fee_date),
-      })),
+      rowsWithDelay,
     );
   } catch (error: any) {
     return errorFBR(error.message);
