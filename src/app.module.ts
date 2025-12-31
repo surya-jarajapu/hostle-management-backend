@@ -15,6 +15,7 @@ import { UserModule } from './master/user/user.module';
 import { masterUserModule } from './master/masterUser/masterUser.module';
 import { AdminDashboardModule } from './master/admin_dashboard/admin-dashboard.module';
 import { HostelModule } from './master/hostel/hostel.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { HostelModule } from './master/hostel/hostel.module';
     masterUserModule,
     AdminDashboardModule,
     HostelModule,
+    HealthModule
   ],
 
   controllers: [AppController],
