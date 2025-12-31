@@ -103,31 +103,41 @@ export class RoomService {
   }
 
   // SEARCH ROOMS
-  async find(dto: RoomQueryDTO, authUser: any): Promise<FBR> {
-    try {
-      const rooms = await this.prisma.room.findMany({
-        where: {
-          hostel_id: authUser.hostel_id, // ✅ IMPORTANT
+async find(dto: RoomQueryDTO, authUser: any): Promise<FBR> {
+  try {
+    const rooms = await this.prisma.room.findMany({
+      where: {
+        hostel_id: authUser.hostel_id,
+      },
+      select: {
+        room_id: true,
+        room_number: true,
+        floor_number: true,
+        total_beds: true,
+        status: true,
+        addedAt: true,
+        _count: {
+          select: { users: true },
         },
-        include: {
-          users: {
-            select: { user_id: true },
-          },
-        },
-        orderBy: [{ status: 'asc' }, { addedAt: 'desc' }],
-      });
+      },
+      orderBy: [
+        { status: 'asc' },
+        { addedAt: 'desc' },
+      ],
+    });
 
-      const rows = rooms.map((r) => ({
-        ...r,
-        used_beds: r.users.length,
-        available_beds: r.total_beds - r.users.length,
-      }));
+    const rows = rooms.map((r) => ({
+      ...r,
+      used_beds: r._count.users,
+      available_beds: r.total_beds - r._count.users,
+    }));
 
-      return successFBR(rows.length, rows.length, 0, 0, rows);
-    } catch (error) {
-      return errorFBR(error?.message);
-    }
+    return successFBR(rows.length, rows.length, 0, 0, rows);
+  } catch (error: any) {
+    return errorFBR(error.message);
   }
+}
+
 
   // DELETE
   async delete(roomId: string, authUser: any): Promise<DBR> {

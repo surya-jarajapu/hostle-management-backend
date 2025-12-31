@@ -67,7 +67,7 @@ export class AuthService {
     }
   }
 
-async login(dto: any) {
+ async login(dto: any) {
   const masterUser = await this.prisma.masterUser.findUnique({
     where: { email: dto.email },
     include: {
@@ -78,31 +78,28 @@ async login(dto: any) {
   });
 
   if (!masterUser)
-    throw new UnauthorizedException('Invalid email or password');
+    throw new UnauthorizedException("Invalid email or password");
 
   if (dto.password !== masterUser.password)
-    throw new UnauthorizedException('Invalid email or password');
+    throw new UnauthorizedException("Invalid email or password");
 
-  if (!process.env.JWT_SECRET) {
-    throw new Error('JWT_SECRET is not set');
-  }
+  if (!masterUser.hostel)
+    throw new UnauthorizedException("User is not assigned to hostel");
 
   const token = this.jwt.sign(
     {
       master_user_id: masterUser.master_user_id,
       role: masterUser.role,
-      hostel_id: masterUser.hostel.hostel_id, // ✅ FIXED
+      hostel_id: masterUser.hostel.hostel_id,
     },
-    {
-      secret: process.env.JWT_SECRET,
-    },
+    { secret: process.env.JWT_SECRET }
   );
 
   const { password, ...safe } = masterUser;
 
   return {
     status: true,
-    message: 'Login successful',
+    message: "Login successful",
     data: {
       token,
       masterUser: safe,

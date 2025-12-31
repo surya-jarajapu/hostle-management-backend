@@ -1,12 +1,5 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
-import {
-  buildIn,
-  buildInclude,
-  buildOrderBy,
-  search,
-} from 'src/global_utils/PrismaUtils';
 
 import {
   BR,
@@ -21,13 +14,12 @@ import {
   successFBR,
 } from 'src/global_utils/BaseResponse';
 
-import { formatDBDateTime } from 'src/global_utils/DateUtils';
 
-import { Prisma, User } from 'prisma/generated';
+import { Prisma } from 'prisma/generated';
+import { calculateDelayDays } from 'src/global_utils/delaydays/calculateDelayDays ';
 import { PAGING } from 'src/global_utils/EnumsBase';
 import { PrismaPostgrePBService } from 'src/prisma/prisma_postgre_rpt.service';
 import { CollectFeeDTO, UserDTO, UserQueryDTO } from './user.controller';
-import { calculateDelayDays } from 'src/global_utils/delaydays/calculateDelayDays ';
 
 const name = `User`;
 
@@ -198,62 +190,75 @@ export class UserService {
   // -----------------------------------------
   // FIND USERS (HOSTEL ISOLATED)
   // -----------------------------------------
-  async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
-    try {
-      const where: any = {
-        hostel_id: authUser.hostel_id,
+ // -----------------------------------------
+// FIND USERS (HOSTEL ISOLATED)
+// -----------------------------------------
+async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
+  try {
+    const where: Prisma.UserWhereInput = {
+      hostel_id: authUser.hostel_id,
 
-        ...(dto.search && {
-          OR: [
-            { user_name: { contains: dto.search, mode: 'insensitive' } },
-            { mobile: { contains: dto.search } },
-            {
-              room: {
-                room_number: { contains: dto.search, mode: 'insensitive' },
+      ...(dto.search && {
+        OR: [
+          { user_name: { contains: dto.search, mode: 'insensitive' } },
+          { mobile: { contains: dto.search } },
+          {
+            room: {
+              room_number: {
+                contains: dto.search,
+                mode: 'insensitive',
               },
             },
-          ],
-        }),
+          },
+        ],
+      }),
 
-        ...(dto.status && Array.isArray(dto.status)
+      ...(dto.status
+        ? Array.isArray(dto.status)
           ? { status: { in: dto.status } }
-          : dto.status
-            ? { status: dto.status }
-            : {}),
-      };
+          : { status: dto.status }
+        : {}),
+    };
 
-      const totalCount = await this.prisma.user.count({ where });
+    const total = await this.prisma.user.count({ where });
 
-      const take = dto.paging === PAGING.Yes ? dto.page_count : totalCount;
+    const take =
+      dto.paging === PAGING.Yes ? dto.page_count : total;
 
-      const skip = dto.paging === PAGING.Yes ? dto.page_index * take : 0;
+    const skip =
+      dto.paging === PAGING.Yes ? dto.page_index * take : 0;
 
-      const rows = await this.prisma.user.findMany({
-        where,
-        include: {
-          room: {
-            select: {
-              room_id: true,
-              room_number: true,
-              floor_number: true,
-            },
+    const rows = await this.prisma.user.findMany({
+      where,
+      include: {
+        room: {
+          select: {
+            room_id: true,
+            room_number: true,
+            floor_number: true,
           },
         },
-        take,
-        skip,
-        orderBy: { added_date_time: 'desc' },
-      });
+      },
+      orderBy: { added_date_time: 'desc' },
+      take,
+      skip,
+    });
 
-      const rows_ = rows.map((r) => ({
+    return successFBR(
+      total,
+      take,
+      skip,
+      dto.page_index,
+      rows.map((r) => ({
         ...r,
         delay_days: calculateDelayDays(r.next_fee_date),
-      }));
-
-      return successFBR(totalCount, take, skip, dto.page_index, rows_);
-    } catch (error: any) {
-      return errorFBR(error.message);
-    }
+      })),
+    );
+  } catch (error: any) {
+    return errorFBR(error.message);
   }
+}
+
 
   // -----------------------------------------
   // DELETE USER
