@@ -1,14 +1,17 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from 'prisma/generated';
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { PrismaClient } from '../../prisma/generated/client';
 
 @Injectable()
 export class PrismaPostgrePBService
   extends PrismaClient
-  implements OnModuleInit
+  implements OnModuleInit, OnModuleDestroy
 {
-  onModuleInit() {
-    this.$connect()
-      .then(() => console.log('Connected to postgre_rpt_db'))
-      .catch((err) => console.log(err));
+  async onModuleInit() {
+    await this.$connect();
+    console.log('✅ Prisma connected to PostgreSQL');
+  }
+
+  async onModuleDestroy() {
+    await this.$disconnect();
   }
 }
