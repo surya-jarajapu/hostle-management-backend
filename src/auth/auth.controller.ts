@@ -22,6 +22,13 @@ export class AuthController {
     return this.auth.login(dto);
   }
 
+  // 🟢 THIS IS THE IMPORTANT ONE (DB wakes here)
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  async me(@Req() req: any) {
+    return this.auth.getMe(req.user.master_user_id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   async profile(@Req() req: any) {

@@ -188,96 +188,86 @@ export class UserService {
   // -----------------------------------------
   // FIND USERS (HOSTEL ISOLATED)
   // -----------------------------------------
-  // -----------------------------------------
-  // FIND USERS (HOSTEL ISOLATED)
-  // -----------------------------------------
-async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
-  try {
-    const where: Prisma.UserWhereInput = {
-      hostel_id: authUser.hostel_id,
+  async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
+    try {
+      const where: Prisma.UserWhereInput = {
+        hostel_id: authUser.hostel_id,
 
-      ...(dto.search && {
-        OR: [
-          { user_name: { contains: dto.search, mode: 'insensitive' } },
-          { mobile: { contains: dto.search } },
-          {
-            room: {
-              room_number: {
-                contains: dto.search,
-                mode: 'insensitive',
+        ...(dto.search && {
+          OR: [
+            { user_name: { contains: dto.search, mode: 'insensitive' } },
+            { mobile: { contains: dto.search } },
+            {
+              room: {
+                room_number: {
+                  contains: dto.search,
+                  mode: 'insensitive',
+                },
               },
             },
-          },
-        ],
-      }),
+          ],
+        }),
 
-      ...(dto.status
-        ? Array.isArray(dto.status)
-          ? { status: { in: dto.status } }
-          : { status: dto.status }
-        : {}),
-    };
+        ...(dto.status
+          ? Array.isArray(dto.status)
+            ? { status: { in: dto.status } }
+            : { status: dto.status }
+          : {}),
+      };
 
-    const total = await this.prisma.user.count({ where });
+      const total = await this.prisma.user.count({ where });
 
-    const take = dto.paging === PAGING.Yes ? dto.page_count : total;
-    const skip = dto.paging === PAGING.Yes ? dto.page_index * take : 0;
+      const take = dto.paging === PAGING.Yes ? dto.page_count : total;
+      const skip = dto.paging === PAGING.Yes ? dto.page_index * take : 0;
 
-    const rows = await this.prisma.user.findMany({
-      where,
-      include: {
-        room: {
-          select: {
-            room_id: true,
-            room_number: true,
-            floor_number: true,
+      const rows = await this.prisma.user.findMany({
+        where,
+        include: {
+          room: {
+            select: {
+              room_id: true,
+              room_number: true,
+              floor_number: true,
+            },
           },
         },
-      },
-      take,
-      skip,
-    });
+        take,
+        skip,
+      });
 
-    /** ✅ 1️⃣ add delay_days */
-    const rowsWithDelay = rows.map((r) => ({
-      ...r,
-      delay_days: calculateDelayDays(r.next_fee_date),
-    }));
+      /** ✅ 1️⃣ add delay_days */
+      const rowsWithDelay = rows.map((r) => ({
+        ...r,
+        delay_days: calculateDelayDays(r.next_fee_date),
+      }));
 
-    /** ✅ 2️⃣ sort overdue first */
-    rowsWithDelay.sort((a, b) => {
-      const aOverdue = a.delay_days > 0;
-      const bOverdue = b.delay_days > 0;
+      /** ✅ 2️⃣ sort overdue first */
+      rowsWithDelay.sort((a, b) => {
+        const aOverdue = a.delay_days > 0;
+        const bOverdue = b.delay_days > 0;
 
-      // 🔴 overdue users first
-      if (aOverdue !== bOverdue) {
-        return aOverdue ? -1 : 1;
-      }
+        // 🔴 overdue users first
+        if (aOverdue !== bOverdue) {
+          return aOverdue ? -1 : 1;
+        }
 
-      // ⏱ higher delay first
-      if (a.delay_days !== b.delay_days) {
-        return b.delay_days - a.delay_days;
-      }
+        // ⏱ higher delay first
+        if (a.delay_days !== b.delay_days) {
+          return b.delay_days - a.delay_days;
+        }
 
-      // 📅 newest first (fallback)
-      return (
-        new Date(b.added_date_time).getTime() -
-        new Date(a.added_date_time).getTime()
-      );
-    });
+        // 📅 newest first (fallback)
+        return (
+          new Date(b.added_date_time).getTime() -
+          new Date(a.added_date_time).getTime()
+        );
+      });
 
-    return successFBR(
-      total,
-      take,
-      skip,
-      dto.page_index,
-      rowsWithDelay,
-    );
-  } catch (error: any) {
-    return errorFBR(error.message);
+      return successFBR(total, take, skip, dto.page_index, rowsWithDelay);
+    } catch (error: any) {
+      return errorFBR(error.message);
+    }
   }
-}
-
 
   // -----------------------------------------
   // DELETE USER
@@ -359,7 +349,4 @@ async find(dto: UserQueryDTO, authUser: any): Promise<FBR> {
     return successBR(user_id, name, updated);
   }
 
-  // -----------------------------------------
-  // APPROVE FEE (ADMIN ONLY)
-  // -----------------------------------------
 }

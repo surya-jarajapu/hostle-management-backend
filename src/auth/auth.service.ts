@@ -4,6 +4,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { dbRetry } from 'src/common/dbRetry';
 import { PrismaPostgrePBService } from 'src/prisma/prisma_postgre_rpt.service';
 
 @Injectable()
@@ -67,46 +68,60 @@ export class AuthService {
     }
   }
 
- async login(dto: any) {
-  const masterUser = await this.prisma.masterUser.findUnique({
-    where: { email: dto.email },
-    include: {
-      hostel: {
-        select: { hostel_id: true, name: true },
+  async login(dto: any) {
+    const masterUser = await this.prisma.masterUser.findUnique({
+      where: { email: dto.email },
+      include: {
+        hostel: {
+          select: { hostel_id: true, name: true },
+        },
       },
-    },
-  });
+    });
 
-  if (!masterUser)
-    throw new UnauthorizedException("Invalid email or password");
+    if (!masterUser)
+      throw new UnauthorizedException('Invalid email or password');
 
-  if (dto.password !== masterUser.password)
-    throw new UnauthorizedException("Invalid email or password");
+    if (dto.password !== masterUser.password)
+      throw new UnauthorizedException('Invalid email or password');
 
-  if (!masterUser.hostel)
-    throw new UnauthorizedException("User is not assigned to hostel");
+    if (!masterUser.hostel)
+      throw new UnauthorizedException('User is not assigned to hostel');
 
-  const token = this.jwt.sign(
-    {
-      master_user_id: masterUser.master_user_id,
-      role: masterUser.role,
-      hostel_id: masterUser.hostel.hostel_id,
-    },
-    { secret: process.env.JWT_SECRET }
-  );
+    const token = this.jwt.sign(
+      {
+        master_user_id: masterUser.master_user_id,
+        role: masterUser.role,
+        hostel_id: masterUser.hostel.hostel_id,
+      },
+      {
+        secret: process.env.JWT_SECRET,
+        expiresIn: '1d', // ✅ ADD THIS
+      },
+    );
 
-  const { password, ...safe } = masterUser;
+    const { password, ...safe } = masterUser;
 
-  return {
-    status: true,
-    message: "Login successful",
-    data: {
-      token,
-      masterUser: safe,
-    },
-  };
-}
+    return {
+      status: true,
+      message: 'Login successful',
+      data: {
+        token,
+        masterUser: safe,
+      },
+    };
+  }
 
+  // 🟢 CORRECT getMe — THIS wakes Neon safely
+  async getMe(master_user_id: string) {
+    return dbRetry(() =>
+      this.prisma.masterUser.findUnique({
+        where: { master_user_id },
+        include: {
+          hostel: true,
+        },
+      }),
+    );
+  }
 
   async validate(payload: any) {
     console.log('JWT PAYLOAD:', payload);

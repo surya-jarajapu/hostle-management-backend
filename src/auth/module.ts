@@ -7,10 +7,10 @@ import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'SECRET123',
-      signOptions: { expiresIn: '7d' },
+      secret: process.env.JWT_SECRET, // ✅ no fallback
+      // ❌ REMOVE expiresIn from here
     }),
   ],
   providers: [AuthService, JwtStrategy],
