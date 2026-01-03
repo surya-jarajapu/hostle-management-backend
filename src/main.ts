@@ -22,6 +22,7 @@ async function bootstrap() {
   // 🌍 Global prefix
   app.setGlobalPrefix('api');
 
+
   // ✅ Validation
   app.useGlobalPipes(
     new ValidationPipe({

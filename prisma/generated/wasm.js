@@ -107,39 +107,39 @@ exports.Prisma.MasterUserScalarFieldEnum = {
   mobile: 'mobile',
   password: 'password',
   role: 'role',
-  hostel_id: 'hostel_id',
   added_date_time: 'added_date_time',
-  modified_date_time: 'modified_date_time'
+  modified_date_time: 'modified_date_time',
+  hostel_id: 'hostel_id'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
   user_id: 'user_id',
-  user_name: 'user_name',
   email: 'email',
   mobile: 'mobile',
-  user_image: 'user_image',
-  joining_date: 'joining_date',
-  next_fee_date: 'next_fee_date',
-  monthly_fee: 'monthly_fee',
-  due_amount: 'due_amount',
-  room_id: 'room_id',
-  hostel_id: 'hostel_id',
-  user_fee_receipt: 'user_fee_receipt',
-  payment_status: 'payment_status',
   status: 'status',
   added_date_time: 'added_date_time',
-  modified_date_time: 'modified_date_time'
+  modified_date_time: 'modified_date_time',
+  due_amount: 'due_amount',
+  joining_date: 'joining_date',
+  monthly_fee: 'monthly_fee',
+  next_fee_date: 'next_fee_date',
+  user_fee_receipt: 'user_fee_receipt',
+  hostel_id: 'hostel_id',
+  room_id: 'room_id',
+  user_image: 'user_image',
+  user_name: 'user_name',
+  payment_status: 'payment_status'
 };
 
 exports.Prisma.RoomScalarFieldEnum = {
-  room_id: 'room_id',
-  floor_number: 'floor_number',
-  room_number: 'room_number',
-  total_beds: 'total_beds',
-  hostel_id: 'hostel_id',
   status: 'status',
   addedAt: 'addedAt',
-  modifiedAt: 'modifiedAt'
+  modifiedAt: 'modifiedAt',
+  hostel_id: 'hostel_id',
+  room_id: 'room_id',
+  room_number: 'room_number',
+  total_beds: 'total_beds',
+  floor_number: 'floor_number'
 };
 
 exports.Prisma.SortOrder = {
@@ -231,13 +231,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum PaymentStatus {\n  NONE\n  PENDING\n  APPROVED\n}\n\nenum Status {\n  Active\n  Inactive\n}\n\nenum MasterRole {\n  ADMIN\n  SUPERVISOR\n  STAFF\n}\n\nmodel Hostel {\n  hostel_id String  @id @default(uuid())\n  name      String  @unique // 👈 IMPORTANT\n  address   String?\n\n  added_date_time DateTime @default(now())\n\n  users       User[]\n  rooms       Room[]\n  masterUsers MasterUser[]\n\n  @@map(\"hostel\") // MUST BE HERE\n}\n\nmodel MasterUser {\n  master_user_id String     @id @default(uuid())\n  name           String\n  email          String     @unique // 👈 ADD THIS\n  mobile         String\n  password       String\n  role           MasterRole @default(ADMIN)\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel User {\n  user_id    String  @id @default(uuid())\n  user_name  String\n  email      String?\n  mobile     String\n  user_image String?\n\n  joining_date  DateTime  @default(now())\n  next_fee_date DateTime?\n  monthly_fee   Int\n  due_amount    Int\n\n  room_id String?\n  room    Room?   @relation(fields: [room_id], references: [room_id])\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  user_fee_receipt String?\n  payment_status   PaymentStatus @default(NONE)\n\n  status             Status   @default(Active)\n  added_date_time    DateTime @default(now())\n  modified_date_time DateTime @updatedAt\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel Room {\n  room_id      String  @id @default(uuid())\n  floor_number String?\n  room_number  String\n  total_beds   Int\n\n  hostel_id String\n  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])\n\n  users User[]\n\n  status     Status   @default(Active)\n  addedAt    DateTime @default(now())\n  modifiedAt DateTime @updatedAt\n\n  @@unique([hostel_id, room_number])\n}\n",
-  "inlineSchemaHash": "b2024075f598dec1d511a187c88892c0402eade5e3d181f8ee17e8132f707a95",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Hostel {\n  hostel_id       String       @id @default(uuid())\n  name            String       @unique\n  address         String?\n  added_date_time DateTime     @default(now())\n  masterUsers     MasterUser[]\n  rooms           Room[]\n  users           User[]\n\n  @@map(\"hostel\")\n}\n\nmodel MasterUser {\n  master_user_id     String     @id @default(uuid())\n  name               String\n  email              String     @unique\n  mobile             String\n  password           String\n  role               MasterRole @default(ADMIN)\n  added_date_time    DateTime   @default(now())\n  modified_date_time DateTime   @updatedAt\n  hostel_id          String\n  hostel             Hostel     @relation(fields: [hostel_id], references: [hostel_id])\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel User {\n  user_id            String        @id @default(uuid())\n  email              String?\n  mobile             String\n  status             Status        @default(Active)\n  added_date_time    DateTime      @default(now())\n  modified_date_time DateTime      @updatedAt\n  due_amount         Int\n  joining_date       DateTime      @default(now())\n  monthly_fee        Int\n  next_fee_date      DateTime?\n  user_fee_receipt   String?\n  hostel_id          String\n  room_id            String?\n  user_image         String?\n  user_name          String\n  payment_status     PaymentStatus @default(NONE)\n  hostel             Hostel        @relation(fields: [hostel_id], references: [hostel_id])\n  room               Room?         @relation(fields: [room_id], references: [room_id])\n\n  @@unique([hostel_id, email])\n  @@unique([hostel_id, mobile])\n}\n\nmodel Room {\n  status       Status   @default(Active)\n  addedAt      DateTime @default(now())\n  modifiedAt   DateTime @updatedAt\n  hostel_id    String\n  room_id      String   @id @default(uuid())\n  room_number  String\n  total_beds   Int\n  floor_number String?\n  hostel       Hostel   @relation(fields: [hostel_id], references: [hostel_id])\n  users        User[]\n\n  @@unique([hostel_id, room_number])\n}\n\nenum PaymentStatus {\n  NONE\n  PENDING\n  APPROVED\n}\n\nenum Status {\n  Active\n  Inactive\n}\n\nenum MasterRole {\n  ADMIN\n  SUPERVISOR\n  STAFF\n}\n",
+  "inlineSchemaHash": "15c5ba15c3ba2829b23058337ff470c26082c95d2f6548af90016efb97c3b205",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Hostel\":{\"fields\":[{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"HostelToUser\"},{\"name\":\"rooms\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"HostelToRoom\"},{\"name\":\"masterUsers\",\"kind\":\"object\",\"type\":\"MasterUser\",\"relationName\":\"HostelToMasterUser\"}],\"dbName\":\"hostel\"},\"MasterUser\":{\"fields\":[{\"name\":\"master_user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"MasterRole\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToMasterUser\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modified_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"joining_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"next_fee_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monthly_fee\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"due_amount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"room_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"RoomToUser\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToUser\"},{\"name\":\"user_fee_receipt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payment_status\",\"kind\":\"enum\",\"type\":\"PaymentStatus\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modified_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Room\":{\"fields\":[{\"name\":\"room_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"floor_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"room_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"total_beds\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToRoom\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RoomToUser\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"addedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modifiedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Hostel\":{\"fields\":[{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"masterUsers\",\"kind\":\"object\",\"type\":\"MasterUser\",\"relationName\":\"HostelToMasterUser\"},{\"name\":\"rooms\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"HostelToRoom\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"HostelToUser\"}],\"dbName\":\"hostel\"},\"MasterUser\":{\"fields\":[{\"name\":\"master_user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"MasterRole\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modified_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToMasterUser\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"added_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modified_date_time\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"due_amount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"joining_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monthly_fee\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"next_fee_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user_fee_receipt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"room_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payment_status\",\"kind\":\"enum\",\"type\":\"PaymentStatus\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToUser\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"RoomToUser\"}],\"dbName\":null},\"Room\":{\"fields\":[{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"addedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"modifiedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"hostel_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"room_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"room_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"total_beds\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"floor_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hostel\",\"kind\":\"object\",\"type\":\"Hostel\",\"relationName\":\"HostelToRoom\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RoomToUser\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

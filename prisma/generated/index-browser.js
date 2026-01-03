@@ -135,39 +135,39 @@ exports.Prisma.MasterUserScalarFieldEnum = {
   mobile: 'mobile',
   password: 'password',
   role: 'role',
-  hostel_id: 'hostel_id',
   added_date_time: 'added_date_time',
-  modified_date_time: 'modified_date_time'
+  modified_date_time: 'modified_date_time',
+  hostel_id: 'hostel_id'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
   user_id: 'user_id',
-  user_name: 'user_name',
   email: 'email',
   mobile: 'mobile',
-  user_image: 'user_image',
-  joining_date: 'joining_date',
-  next_fee_date: 'next_fee_date',
-  monthly_fee: 'monthly_fee',
-  due_amount: 'due_amount',
-  room_id: 'room_id',
-  hostel_id: 'hostel_id',
-  user_fee_receipt: 'user_fee_receipt',
-  payment_status: 'payment_status',
   status: 'status',
   added_date_time: 'added_date_time',
-  modified_date_time: 'modified_date_time'
+  modified_date_time: 'modified_date_time',
+  due_amount: 'due_amount',
+  joining_date: 'joining_date',
+  monthly_fee: 'monthly_fee',
+  next_fee_date: 'next_fee_date',
+  user_fee_receipt: 'user_fee_receipt',
+  hostel_id: 'hostel_id',
+  room_id: 'room_id',
+  user_image: 'user_image',
+  user_name: 'user_name',
+  payment_status: 'payment_status'
 };
 
 exports.Prisma.RoomScalarFieldEnum = {
-  room_id: 'room_id',
-  floor_number: 'floor_number',
-  room_number: 'room_number',
-  total_beds: 'total_beds',
-  hostel_id: 'hostel_id',
   status: 'status',
   addedAt: 'addedAt',
-  modifiedAt: 'modifiedAt'
+  modifiedAt: 'modifiedAt',
+  hostel_id: 'hostel_id',
+  room_id: 'room_id',
+  room_number: 'room_number',
+  total_beds: 'total_beds',
+  floor_number: 'floor_number'
 };
 
 exports.Prisma.SortOrder = {
@@ -190,15 +190,15 @@ exports.MasterRole = exports.$Enums.MasterRole = {
   STAFF: 'STAFF'
 };
 
+exports.Status = exports.$Enums.Status = {
+  Active: 'Active',
+  Inactive: 'Inactive'
+};
+
 exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   NONE: 'NONE',
   PENDING: 'PENDING',
   APPROVED: 'APPROVED'
-};
-
-exports.Status = exports.$Enums.Status = {
-  Active: 'Active',
-  Inactive: 'Inactive'
 };
 
 exports.Prisma.ModelName = {

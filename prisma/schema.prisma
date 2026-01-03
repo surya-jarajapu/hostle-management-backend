@@ -9,6 +9,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Hostel {
+  hostel_id       String       @id @default(uuid())
+  name            String       @unique
+  address         String?
+  added_date_time DateTime     @default(now())
+  masterUsers     MasterUser[]
+  rooms           Room[]
+  users           User[]
+
+  @@map("hostel")
+}
+
+model MasterUser {
+  master_user_id     String     @id @default(uuid())
+  name               String
+  email              String     @unique
+  mobile             String
+  password           String
+  role               MasterRole @default(ADMIN)
+  added_date_time    DateTime   @default(now())
+  modified_date_time DateTime   @updatedAt
+  hostel_id          String
+  hostel             Hostel     @relation(fields: [hostel_id], references: [hostel_id])
+
+  @@unique([hostel_id, email])
+  @@unique([hostel_id, mobile])
+}
+
+model User {
+  user_id            String        @id @default(uuid())
+  email              String?
+  mobile             String
+  status             Status        @default(Active)
+  added_date_time    DateTime      @default(now())
+  modified_date_time DateTime      @updatedAt
+  due_amount         Int
+  joining_date       DateTime      @default(now())
+  monthly_fee        Int
+  next_fee_date      DateTime?
+  user_fee_receipt   String?
+  hostel_id          String
+  room_id            String?
+  user_image         String?
+  user_name          String
+  payment_status     PaymentStatus @default(NONE)
+  hostel             Hostel        @relation(fields: [hostel_id], references: [hostel_id])
+  room               Room?         @relation(fields: [room_id], references: [room_id])
+
+  @@unique([hostel_id, email])
+  @@unique([hostel_id, mobile])
+}
+
+model Room {
+  status       Status   @default(Active)
+  addedAt      DateTime @default(now())
+  modifiedAt   DateTime @updatedAt
+  hostel_id    String
+  room_id      String   @id @default(uuid())
+  room_number  String
+  total_beds   Int
+  floor_number String?
+  hostel       Hostel   @relation(fields: [hostel_id], references: [hostel_id])
+  users        User[]
+
+  @@unique([hostel_id, room_number])
+}
+
 enum PaymentStatus {
   NONE
   PENDING
@@ -24,82 +91,4 @@ enum MasterRole {
   ADMIN
   SUPERVISOR
   STAFF
-}
-
-model Hostel {
-  hostel_id String @id @default(uuid())
-  name      String @unique   // 👈 IMPORTANT
-  address   String?
-
-  added_date_time DateTime @default(now())
-
-  users       User[]
-  rooms       Room[]
-  masterUsers MasterUser[]
-  @@map("hostel")   // MUST BE HERE
-}
-
-model MasterUser {
-  master_user_id String     @id @default(uuid())
-  name           String
-  email          String @unique   // 👈 ADD THIS
-  mobile         String
-  password       String
-  role           MasterRole @default(ADMIN)
-
-  hostel_id String
-  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])
-
-  added_date_time    DateTime @default(now())
-  modified_date_time DateTime @updatedAt
-
-  @@unique([hostel_id, email])
-  @@unique([hostel_id, mobile])
-}
-
-model User {
-  user_id     String  @id @default(uuid())
-  user_name   String
-  email       String?
-  mobile      String
-  user_image  String?
-
-  joining_date  DateTime  @default(now())
-  next_fee_date DateTime?
-  monthly_fee   Int
-  due_amount    Int
-
-  room_id String?
-  room    Room?   @relation(fields: [room_id], references: [room_id])
-
-  hostel_id String
-  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])
-
-  user_fee_receipt String?
-  payment_status PaymentStatus @default(NONE)
-
-  status             Status   @default(Active)
-  added_date_time    DateTime @default(now())
-  modified_date_time DateTime @updatedAt
-
-  @@unique([hostel_id, email])
-  @@unique([hostel_id, mobile])
-}
-
-model Room {
-  room_id     String @id @default(uuid())
-  floor_number String?
-  room_number String
-  total_beds  Int
-
-  hostel_id String
-  hostel    Hostel @relation(fields: [hostel_id], references: [hostel_id])
-
-  users User[]
-
-  status     Status   @default(Active)
-  addedAt    DateTime @default(now())
-  modifiedAt DateTime @updatedAt
-
-  @@unique([hostel_id, room_number])
 }

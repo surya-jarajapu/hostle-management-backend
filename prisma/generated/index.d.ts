@@ -1177,15 +1177,15 @@ export namespace Prisma {
    */
 
   export type HostelCountOutputType = {
-    users: number
-    rooms: number
     masterUsers: number
+    rooms: number
+    users: number
   }
 
   export type HostelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | HostelCountOutputTypeCountUsersArgs
-    rooms?: boolean | HostelCountOutputTypeCountRoomsArgs
     masterUsers?: boolean | HostelCountOutputTypeCountMasterUsersArgs
+    rooms?: boolean | HostelCountOutputTypeCountRoomsArgs
+    users?: boolean | HostelCountOutputTypeCountUsersArgs
   }
 
   // Custom InputTypes
@@ -1202,8 +1202,8 @@ export namespace Prisma {
   /**
    * HostelCountOutputType without action
    */
-  export type HostelCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
+  export type HostelCountOutputTypeCountMasterUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MasterUserWhereInput
   }
 
   /**
@@ -1216,8 +1216,8 @@ export namespace Prisma {
   /**
    * HostelCountOutputType without action
    */
-  export type HostelCountOutputTypeCountMasterUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MasterUserWhereInput
+  export type HostelCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -1412,9 +1412,9 @@ export namespace Prisma {
     name?: boolean
     address?: boolean
     added_date_time?: boolean
-    users?: boolean | Hostel$usersArgs<ExtArgs>
-    rooms?: boolean | Hostel$roomsArgs<ExtArgs>
     masterUsers?: boolean | Hostel$masterUsersArgs<ExtArgs>
+    rooms?: boolean | Hostel$roomsArgs<ExtArgs>
+    users?: boolean | Hostel$usersArgs<ExtArgs>
     _count?: boolean | HostelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hostel"]>
 
@@ -1441,9 +1441,9 @@ export namespace Prisma {
 
   export type HostelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"hostel_id" | "name" | "address" | "added_date_time", ExtArgs["result"]["hostel"]>
   export type HostelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | Hostel$usersArgs<ExtArgs>
-    rooms?: boolean | Hostel$roomsArgs<ExtArgs>
     masterUsers?: boolean | Hostel$masterUsersArgs<ExtArgs>
+    rooms?: boolean | Hostel$roomsArgs<ExtArgs>
+    users?: boolean | Hostel$usersArgs<ExtArgs>
     _count?: boolean | HostelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type HostelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1452,9 +1452,9 @@ export namespace Prisma {
   export type $HostelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Hostel"
     objects: {
-      users: Prisma.$UserPayload<ExtArgs>[]
-      rooms: Prisma.$RoomPayload<ExtArgs>[]
       masterUsers: Prisma.$MasterUserPayload<ExtArgs>[]
+      rooms: Prisma.$RoomPayload<ExtArgs>[]
+      users: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       hostel_id: string
@@ -1855,9 +1855,9 @@ export namespace Prisma {
    */
   export interface Prisma__HostelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends Hostel$usersArgs<ExtArgs> = {}>(args?: Subset<T, Hostel$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    rooms<T extends Hostel$roomsArgs<ExtArgs> = {}>(args?: Subset<T, Hostel$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     masterUsers<T extends Hostel$masterUsersArgs<ExtArgs> = {}>(args?: Subset<T, Hostel$masterUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rooms<T extends Hostel$roomsArgs<ExtArgs> = {}>(args?: Subset<T, Hostel$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Hostel$usersArgs<ExtArgs> = {}>(args?: Subset<T, Hostel$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2279,27 +2279,27 @@ export namespace Prisma {
   }
 
   /**
-   * Hostel.users
+   * Hostel.masterUsers
    */
-  export type Hostel$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Hostel$masterUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the MasterUser
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MasterUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the MasterUser
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MasterUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
+    include?: MasterUserInclude<ExtArgs> | null
+    where?: MasterUserWhereInput
+    orderBy?: MasterUserOrderByWithRelationInput | MasterUserOrderByWithRelationInput[]
+    cursor?: MasterUserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: MasterUserScalarFieldEnum | MasterUserScalarFieldEnum[]
   }
 
   /**
@@ -2327,27 +2327,27 @@ export namespace Prisma {
   }
 
   /**
-   * Hostel.masterUsers
+   * Hostel.users
    */
-  export type Hostel$masterUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Hostel$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MasterUser
+     * Select specific fields to fetch from the User
      */
-    select?: MasterUserSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MasterUser
+     * Omit specific fields from the User
      */
-    omit?: MasterUserOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MasterUserInclude<ExtArgs> | null
-    where?: MasterUserWhereInput
-    orderBy?: MasterUserOrderByWithRelationInput | MasterUserOrderByWithRelationInput[]
-    cursor?: MasterUserWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MasterUserScalarFieldEnum | MasterUserScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -2386,9 +2386,9 @@ export namespace Prisma {
     mobile: string | null
     password: string | null
     role: $Enums.MasterRole | null
-    hostel_id: string | null
     added_date_time: Date | null
     modified_date_time: Date | null
+    hostel_id: string | null
   }
 
   export type MasterUserMaxAggregateOutputType = {
@@ -2398,9 +2398,9 @@ export namespace Prisma {
     mobile: string | null
     password: string | null
     role: $Enums.MasterRole | null
-    hostel_id: string | null
     added_date_time: Date | null
     modified_date_time: Date | null
+    hostel_id: string | null
   }
 
   export type MasterUserCountAggregateOutputType = {
@@ -2410,9 +2410,9 @@ export namespace Prisma {
     mobile: number
     password: number
     role: number
-    hostel_id: number
     added_date_time: number
     modified_date_time: number
+    hostel_id: number
     _all: number
   }
 
@@ -2424,9 +2424,9 @@ export namespace Prisma {
     mobile?: true
     password?: true
     role?: true
-    hostel_id?: true
     added_date_time?: true
     modified_date_time?: true
+    hostel_id?: true
   }
 
   export type MasterUserMaxAggregateInputType = {
@@ -2436,9 +2436,9 @@ export namespace Prisma {
     mobile?: true
     password?: true
     role?: true
-    hostel_id?: true
     added_date_time?: true
     modified_date_time?: true
+    hostel_id?: true
   }
 
   export type MasterUserCountAggregateInputType = {
@@ -2448,9 +2448,9 @@ export namespace Prisma {
     mobile?: true
     password?: true
     role?: true
-    hostel_id?: true
     added_date_time?: true
     modified_date_time?: true
+    hostel_id?: true
     _all?: true
   }
 
@@ -2533,9 +2533,9 @@ export namespace Prisma {
     mobile: string
     password: string
     role: $Enums.MasterRole
-    hostel_id: string
     added_date_time: Date
     modified_date_time: Date
+    hostel_id: string
     _count: MasterUserCountAggregateOutputType | null
     _min: MasterUserMinAggregateOutputType | null
     _max: MasterUserMaxAggregateOutputType | null
@@ -2562,9 +2562,9 @@ export namespace Prisma {
     mobile?: boolean
     password?: boolean
     role?: boolean
-    hostel_id?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
+    hostel_id?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["masterUser"]>
 
@@ -2575,9 +2575,9 @@ export namespace Prisma {
     mobile?: boolean
     password?: boolean
     role?: boolean
-    hostel_id?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
+    hostel_id?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["masterUser"]>
 
@@ -2588,9 +2588,9 @@ export namespace Prisma {
     mobile?: boolean
     password?: boolean
     role?: boolean
-    hostel_id?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
+    hostel_id?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["masterUser"]>
 
@@ -2601,12 +2601,12 @@ export namespace Prisma {
     mobile?: boolean
     password?: boolean
     role?: boolean
-    hostel_id?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
+    hostel_id?: boolean
   }
 
-  export type MasterUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"master_user_id" | "name" | "email" | "mobile" | "password" | "role" | "hostel_id" | "added_date_time" | "modified_date_time", ExtArgs["result"]["masterUser"]>
+  export type MasterUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"master_user_id" | "name" | "email" | "mobile" | "password" | "role" | "added_date_time" | "modified_date_time" | "hostel_id", ExtArgs["result"]["masterUser"]>
   export type MasterUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }
@@ -2629,9 +2629,9 @@ export namespace Prisma {
       mobile: string
       password: string
       role: $Enums.MasterRole
-      hostel_id: string
       added_date_time: Date
       modified_date_time: Date
+      hostel_id: string
     }, ExtArgs["result"]["masterUser"]>
     composites: {}
   }
@@ -3062,9 +3062,9 @@ export namespace Prisma {
     readonly mobile: FieldRef<"MasterUser", 'String'>
     readonly password: FieldRef<"MasterUser", 'String'>
     readonly role: FieldRef<"MasterUser", 'MasterRole'>
-    readonly hostel_id: FieldRef<"MasterUser", 'String'>
     readonly added_date_time: FieldRef<"MasterUser", 'DateTime'>
     readonly modified_date_time: FieldRef<"MasterUser", 'DateTime'>
+    readonly hostel_id: FieldRef<"MasterUser", 'String'>
   }
     
 
@@ -3492,139 +3492,139 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
-    monthly_fee: number | null
     due_amount: number | null
+    monthly_fee: number | null
   }
 
   export type UserSumAggregateOutputType = {
-    monthly_fee: number | null
     due_amount: number | null
+    monthly_fee: number | null
   }
 
   export type UserMinAggregateOutputType = {
     user_id: string | null
-    user_name: string | null
     email: string | null
     mobile: string | null
-    user_image: string | null
-    joining_date: Date | null
-    next_fee_date: Date | null
-    monthly_fee: number | null
-    due_amount: number | null
-    room_id: string | null
-    hostel_id: string | null
-    user_fee_receipt: string | null
-    payment_status: $Enums.PaymentStatus | null
     status: $Enums.Status | null
     added_date_time: Date | null
     modified_date_time: Date | null
+    due_amount: number | null
+    joining_date: Date | null
+    monthly_fee: number | null
+    next_fee_date: Date | null
+    user_fee_receipt: string | null
+    hostel_id: string | null
+    room_id: string | null
+    user_image: string | null
+    user_name: string | null
+    payment_status: $Enums.PaymentStatus | null
   }
 
   export type UserMaxAggregateOutputType = {
     user_id: string | null
-    user_name: string | null
     email: string | null
     mobile: string | null
-    user_image: string | null
-    joining_date: Date | null
-    next_fee_date: Date | null
-    monthly_fee: number | null
-    due_amount: number | null
-    room_id: string | null
-    hostel_id: string | null
-    user_fee_receipt: string | null
-    payment_status: $Enums.PaymentStatus | null
     status: $Enums.Status | null
     added_date_time: Date | null
     modified_date_time: Date | null
+    due_amount: number | null
+    joining_date: Date | null
+    monthly_fee: number | null
+    next_fee_date: Date | null
+    user_fee_receipt: string | null
+    hostel_id: string | null
+    room_id: string | null
+    user_image: string | null
+    user_name: string | null
+    payment_status: $Enums.PaymentStatus | null
   }
 
   export type UserCountAggregateOutputType = {
     user_id: number
-    user_name: number
     email: number
     mobile: number
-    user_image: number
-    joining_date: number
-    next_fee_date: number
-    monthly_fee: number
-    due_amount: number
-    room_id: number
-    hostel_id: number
-    user_fee_receipt: number
-    payment_status: number
     status: number
     added_date_time: number
     modified_date_time: number
+    due_amount: number
+    joining_date: number
+    monthly_fee: number
+    next_fee_date: number
+    user_fee_receipt: number
+    hostel_id: number
+    room_id: number
+    user_image: number
+    user_name: number
+    payment_status: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
-    monthly_fee?: true
     due_amount?: true
+    monthly_fee?: true
   }
 
   export type UserSumAggregateInputType = {
-    monthly_fee?: true
     due_amount?: true
+    monthly_fee?: true
   }
 
   export type UserMinAggregateInputType = {
     user_id?: true
-    user_name?: true
     email?: true
     mobile?: true
-    user_image?: true
-    joining_date?: true
-    next_fee_date?: true
-    monthly_fee?: true
-    due_amount?: true
-    room_id?: true
-    hostel_id?: true
-    user_fee_receipt?: true
-    payment_status?: true
     status?: true
     added_date_time?: true
     modified_date_time?: true
+    due_amount?: true
+    joining_date?: true
+    monthly_fee?: true
+    next_fee_date?: true
+    user_fee_receipt?: true
+    hostel_id?: true
+    room_id?: true
+    user_image?: true
+    user_name?: true
+    payment_status?: true
   }
 
   export type UserMaxAggregateInputType = {
     user_id?: true
-    user_name?: true
     email?: true
     mobile?: true
-    user_image?: true
-    joining_date?: true
-    next_fee_date?: true
-    monthly_fee?: true
-    due_amount?: true
-    room_id?: true
-    hostel_id?: true
-    user_fee_receipt?: true
-    payment_status?: true
     status?: true
     added_date_time?: true
     modified_date_time?: true
+    due_amount?: true
+    joining_date?: true
+    monthly_fee?: true
+    next_fee_date?: true
+    user_fee_receipt?: true
+    hostel_id?: true
+    room_id?: true
+    user_image?: true
+    user_name?: true
+    payment_status?: true
   }
 
   export type UserCountAggregateInputType = {
     user_id?: true
-    user_name?: true
     email?: true
     mobile?: true
-    user_image?: true
-    joining_date?: true
-    next_fee_date?: true
-    monthly_fee?: true
-    due_amount?: true
-    room_id?: true
-    hostel_id?: true
-    user_fee_receipt?: true
-    payment_status?: true
     status?: true
     added_date_time?: true
     modified_date_time?: true
+    due_amount?: true
+    joining_date?: true
+    monthly_fee?: true
+    next_fee_date?: true
+    user_fee_receipt?: true
+    hostel_id?: true
+    room_id?: true
+    user_image?: true
+    user_name?: true
+    payment_status?: true
     _all?: true
   }
 
@@ -3716,21 +3716,21 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     user_id: string
-    user_name: string
     email: string | null
     mobile: string
-    user_image: string | null
-    joining_date: Date
-    next_fee_date: Date | null
-    monthly_fee: number
-    due_amount: number
-    room_id: string | null
-    hostel_id: string
-    user_fee_receipt: string | null
-    payment_status: $Enums.PaymentStatus
     status: $Enums.Status
     added_date_time: Date
     modified_date_time: Date
+    due_amount: number
+    joining_date: Date
+    monthly_fee: number
+    next_fee_date: Date | null
+    user_fee_receipt: string | null
+    hostel_id: string
+    room_id: string | null
+    user_image: string | null
+    user_name: string
+    payment_status: $Enums.PaymentStatus
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -3754,123 +3754,123 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     user_id?: boolean
-    user_name?: boolean
     email?: boolean
     mobile?: boolean
-    user_image?: boolean
-    joining_date?: boolean
-    next_fee_date?: boolean
-    monthly_fee?: boolean
-    due_amount?: boolean
-    room_id?: boolean
-    hostel_id?: boolean
-    user_fee_receipt?: boolean
-    payment_status?: boolean
     status?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
-    room?: boolean | User$roomArgs<ExtArgs>
+    due_amount?: boolean
+    joining_date?: boolean
+    monthly_fee?: boolean
+    next_fee_date?: boolean
+    user_fee_receipt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    user_image?: boolean
+    user_name?: boolean
+    payment_status?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     user_id?: boolean
-    user_name?: boolean
     email?: boolean
     mobile?: boolean
-    user_image?: boolean
-    joining_date?: boolean
-    next_fee_date?: boolean
-    monthly_fee?: boolean
-    due_amount?: boolean
-    room_id?: boolean
-    hostel_id?: boolean
-    user_fee_receipt?: boolean
-    payment_status?: boolean
     status?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
-    room?: boolean | User$roomArgs<ExtArgs>
+    due_amount?: boolean
+    joining_date?: boolean
+    monthly_fee?: boolean
+    next_fee_date?: boolean
+    user_fee_receipt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    user_image?: boolean
+    user_name?: boolean
+    payment_status?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     user_id?: boolean
-    user_name?: boolean
     email?: boolean
     mobile?: boolean
-    user_image?: boolean
-    joining_date?: boolean
-    next_fee_date?: boolean
-    monthly_fee?: boolean
-    due_amount?: boolean
-    room_id?: boolean
-    hostel_id?: boolean
-    user_fee_receipt?: boolean
-    payment_status?: boolean
     status?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
-    room?: boolean | User$roomArgs<ExtArgs>
+    due_amount?: boolean
+    joining_date?: boolean
+    monthly_fee?: boolean
+    next_fee_date?: boolean
+    user_fee_receipt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    user_image?: boolean
+    user_name?: boolean
+    payment_status?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     user_id?: boolean
-    user_name?: boolean
     email?: boolean
     mobile?: boolean
-    user_image?: boolean
-    joining_date?: boolean
-    next_fee_date?: boolean
-    monthly_fee?: boolean
-    due_amount?: boolean
-    room_id?: boolean
-    hostel_id?: boolean
-    user_fee_receipt?: boolean
-    payment_status?: boolean
     status?: boolean
     added_date_time?: boolean
     modified_date_time?: boolean
+    due_amount?: boolean
+    joining_date?: boolean
+    monthly_fee?: boolean
+    next_fee_date?: boolean
+    user_fee_receipt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    user_image?: boolean
+    user_name?: boolean
+    payment_status?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"user_id" | "user_name" | "email" | "mobile" | "user_image" | "joining_date" | "next_fee_date" | "monthly_fee" | "due_amount" | "room_id" | "hostel_id" | "user_fee_receipt" | "payment_status" | "status" | "added_date_time" | "modified_date_time", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"user_id" | "email" | "mobile" | "status" | "added_date_time" | "modified_date_time" | "due_amount" | "joining_date" | "monthly_fee" | "next_fee_date" | "user_fee_receipt" | "hostel_id" | "room_id" | "user_image" | "user_name" | "payment_status", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | User$roomArgs<ExtArgs>
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | User$roomArgs<ExtArgs>
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | User$roomArgs<ExtArgs>
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
+    room?: boolean | User$roomArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      room: Prisma.$RoomPayload<ExtArgs> | null
       hostel: Prisma.$HostelPayload<ExtArgs>
+      room: Prisma.$RoomPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       user_id: string
-      user_name: string
       email: string | null
       mobile: string
-      user_image: string | null
-      joining_date: Date
-      next_fee_date: Date | null
-      monthly_fee: number
-      due_amount: number
-      room_id: string | null
-      hostel_id: string
-      user_fee_receipt: string | null
-      payment_status: $Enums.PaymentStatus
       status: $Enums.Status
       added_date_time: Date
       modified_date_time: Date
+      due_amount: number
+      joining_date: Date
+      monthly_fee: number
+      next_fee_date: Date | null
+      user_fee_receipt: string | null
+      hostel_id: string
+      room_id: string | null
+      user_image: string | null
+      user_name: string
+      payment_status: $Enums.PaymentStatus
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4265,8 +4265,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    room<T extends User$roomArgs<ExtArgs> = {}>(args?: Subset<T, User$roomArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     hostel<T extends HostelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HostelDefaultArgs<ExtArgs>>): Prisma__HostelClient<$Result.GetResult<Prisma.$HostelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    room<T extends User$roomArgs<ExtArgs> = {}>(args?: Subset<T, User$roomArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4297,21 +4297,21 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly user_id: FieldRef<"User", 'String'>
-    readonly user_name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly mobile: FieldRef<"User", 'String'>
-    readonly user_image: FieldRef<"User", 'String'>
-    readonly joining_date: FieldRef<"User", 'DateTime'>
-    readonly next_fee_date: FieldRef<"User", 'DateTime'>
-    readonly monthly_fee: FieldRef<"User", 'Int'>
-    readonly due_amount: FieldRef<"User", 'Int'>
-    readonly room_id: FieldRef<"User", 'String'>
-    readonly hostel_id: FieldRef<"User", 'String'>
-    readonly user_fee_receipt: FieldRef<"User", 'String'>
-    readonly payment_status: FieldRef<"User", 'PaymentStatus'>
     readonly status: FieldRef<"User", 'Status'>
     readonly added_date_time: FieldRef<"User", 'DateTime'>
     readonly modified_date_time: FieldRef<"User", 'DateTime'>
+    readonly due_amount: FieldRef<"User", 'Int'>
+    readonly joining_date: FieldRef<"User", 'DateTime'>
+    readonly monthly_fee: FieldRef<"User", 'Int'>
+    readonly next_fee_date: FieldRef<"User", 'DateTime'>
+    readonly user_fee_receipt: FieldRef<"User", 'String'>
+    readonly hostel_id: FieldRef<"User", 'String'>
+    readonly room_id: FieldRef<"User", 'String'>
+    readonly user_image: FieldRef<"User", 'String'>
+    readonly user_name: FieldRef<"User", 'String'>
+    readonly payment_status: FieldRef<"User", 'PaymentStatus'>
   }
     
 
@@ -4766,36 +4766,36 @@ export namespace Prisma {
   }
 
   export type RoomMinAggregateOutputType = {
-    room_id: string | null
-    floor_number: string | null
-    room_number: string | null
-    total_beds: number | null
-    hostel_id: string | null
     status: $Enums.Status | null
     addedAt: Date | null
     modifiedAt: Date | null
+    hostel_id: string | null
+    room_id: string | null
+    room_number: string | null
+    total_beds: number | null
+    floor_number: string | null
   }
 
   export type RoomMaxAggregateOutputType = {
-    room_id: string | null
-    floor_number: string | null
-    room_number: string | null
-    total_beds: number | null
-    hostel_id: string | null
     status: $Enums.Status | null
     addedAt: Date | null
     modifiedAt: Date | null
+    hostel_id: string | null
+    room_id: string | null
+    room_number: string | null
+    total_beds: number | null
+    floor_number: string | null
   }
 
   export type RoomCountAggregateOutputType = {
-    room_id: number
-    floor_number: number
-    room_number: number
-    total_beds: number
-    hostel_id: number
     status: number
     addedAt: number
     modifiedAt: number
+    hostel_id: number
+    room_id: number
+    room_number: number
+    total_beds: number
+    floor_number: number
     _all: number
   }
 
@@ -4809,36 +4809,36 @@ export namespace Prisma {
   }
 
   export type RoomMinAggregateInputType = {
-    room_id?: true
-    floor_number?: true
-    room_number?: true
-    total_beds?: true
-    hostel_id?: true
     status?: true
     addedAt?: true
     modifiedAt?: true
+    hostel_id?: true
+    room_id?: true
+    room_number?: true
+    total_beds?: true
+    floor_number?: true
   }
 
   export type RoomMaxAggregateInputType = {
-    room_id?: true
-    floor_number?: true
-    room_number?: true
-    total_beds?: true
-    hostel_id?: true
     status?: true
     addedAt?: true
     modifiedAt?: true
+    hostel_id?: true
+    room_id?: true
+    room_number?: true
+    total_beds?: true
+    floor_number?: true
   }
 
   export type RoomCountAggregateInputType = {
-    room_id?: true
-    floor_number?: true
-    room_number?: true
-    total_beds?: true
-    hostel_id?: true
     status?: true
     addedAt?: true
     modifiedAt?: true
+    hostel_id?: true
+    room_id?: true
+    room_number?: true
+    total_beds?: true
+    floor_number?: true
     _all?: true
   }
 
@@ -4929,14 +4929,14 @@ export namespace Prisma {
   }
 
   export type RoomGroupByOutputType = {
-    room_id: string
-    floor_number: string | null
-    room_number: string
-    total_beds: number
-    hostel_id: string
     status: $Enums.Status
     addedAt: Date
     modifiedAt: Date
+    hostel_id: string
+    room_id: string
+    room_number: string
+    total_beds: number
+    floor_number: string | null
     _count: RoomCountAggregateOutputType | null
     _avg: RoomAvgAggregateOutputType | null
     _sum: RoomSumAggregateOutputType | null
@@ -4959,55 +4959,55 @@ export namespace Prisma {
 
 
   export type RoomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    room_id?: boolean
-    floor_number?: boolean
-    room_number?: boolean
-    total_beds?: boolean
-    hostel_id?: boolean
     status?: boolean
     addedAt?: boolean
     modifiedAt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    room_number?: boolean
+    total_beds?: boolean
+    floor_number?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
     users?: boolean | Room$usersArgs<ExtArgs>
     _count?: boolean | RoomCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["room"]>
 
   export type RoomSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    room_id?: boolean
-    floor_number?: boolean
-    room_number?: boolean
-    total_beds?: boolean
-    hostel_id?: boolean
     status?: boolean
     addedAt?: boolean
     modifiedAt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    room_number?: boolean
+    total_beds?: boolean
+    floor_number?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["room"]>
 
   export type RoomSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    room_id?: boolean
-    floor_number?: boolean
-    room_number?: boolean
-    total_beds?: boolean
-    hostel_id?: boolean
     status?: boolean
     addedAt?: boolean
     modifiedAt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    room_number?: boolean
+    total_beds?: boolean
+    floor_number?: boolean
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["room"]>
 
   export type RoomSelectScalar = {
-    room_id?: boolean
-    floor_number?: boolean
-    room_number?: boolean
-    total_beds?: boolean
-    hostel_id?: boolean
     status?: boolean
     addedAt?: boolean
     modifiedAt?: boolean
+    hostel_id?: boolean
+    room_id?: boolean
+    room_number?: boolean
+    total_beds?: boolean
+    floor_number?: boolean
   }
 
-  export type RoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"room_id" | "floor_number" | "room_number" | "total_beds" | "hostel_id" | "status" | "addedAt" | "modifiedAt", ExtArgs["result"]["room"]>
+  export type RoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"status" | "addedAt" | "modifiedAt" | "hostel_id" | "room_id" | "room_number" | "total_beds" | "floor_number", ExtArgs["result"]["room"]>
   export type RoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hostel?: boolean | HostelDefaultArgs<ExtArgs>
     users?: boolean | Room$usersArgs<ExtArgs>
@@ -5027,14 +5027,14 @@ export namespace Prisma {
       users: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      room_id: string
-      floor_number: string | null
-      room_number: string
-      total_beds: number
-      hostel_id: string
       status: $Enums.Status
       addedAt: Date
       modifiedAt: Date
+      hostel_id: string
+      room_id: string
+      room_number: string
+      total_beds: number
+      floor_number: string | null
     }, ExtArgs["result"]["room"]>
     composites: {}
   }
@@ -5118,8 +5118,8 @@ export namespace Prisma {
      * // Get first 10 Rooms
      * const rooms = await prisma.room.findMany({ take: 10 })
      * 
-     * // Only select the `room_id`
-     * const roomWithRoom_idOnly = await prisma.room.findMany({ select: { room_id: true } })
+     * // Only select the `addedAt`
+     * const roomWithAddedAtOnly = await prisma.room.findMany({ select: { addedAt: true } })
      * 
      */
     findMany<T extends RoomFindManyArgs>(args?: SelectSubset<T, RoomFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5163,9 +5163,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Rooms and only return the `room_id`
-     * const roomWithRoom_idOnly = await prisma.room.createManyAndReturn({
-     *   select: { room_id: true },
+     * // Create many Rooms and only return the `addedAt`
+     * const roomWithAddedAtOnly = await prisma.room.createManyAndReturn({
+     *   select: { addedAt: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5254,9 +5254,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Rooms and only return the `room_id`
-     * const roomWithRoom_idOnly = await prisma.room.updateManyAndReturn({
-     *   select: { room_id: true },
+     * // Update zero or more Rooms and only return the `addedAt`
+     * const roomWithAddedAtOnly = await prisma.room.updateManyAndReturn({
+     *   select: { addedAt: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5460,14 +5460,14 @@ export namespace Prisma {
    * Fields of the Room model
    */
   interface RoomFieldRefs {
-    readonly room_id: FieldRef<"Room", 'String'>
-    readonly floor_number: FieldRef<"Room", 'String'>
-    readonly room_number: FieldRef<"Room", 'String'>
-    readonly total_beds: FieldRef<"Room", 'Int'>
-    readonly hostel_id: FieldRef<"Room", 'String'>
     readonly status: FieldRef<"Room", 'Status'>
     readonly addedAt: FieldRef<"Room", 'DateTime'>
     readonly modifiedAt: FieldRef<"Room", 'DateTime'>
+    readonly hostel_id: FieldRef<"Room", 'String'>
+    readonly room_id: FieldRef<"Room", 'String'>
+    readonly room_number: FieldRef<"Room", 'String'>
+    readonly total_beds: FieldRef<"Room", 'Int'>
+    readonly floor_number: FieldRef<"Room", 'String'>
   }
     
 
@@ -5937,9 +5937,9 @@ export namespace Prisma {
     mobile: 'mobile',
     password: 'password',
     role: 'role',
-    hostel_id: 'hostel_id',
     added_date_time: 'added_date_time',
-    modified_date_time: 'modified_date_time'
+    modified_date_time: 'modified_date_time',
+    hostel_id: 'hostel_id'
   };
 
   export type MasterUserScalarFieldEnum = (typeof MasterUserScalarFieldEnum)[keyof typeof MasterUserScalarFieldEnum]
@@ -5947,35 +5947,35 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     user_id: 'user_id',
-    user_name: 'user_name',
     email: 'email',
     mobile: 'mobile',
-    user_image: 'user_image',
-    joining_date: 'joining_date',
-    next_fee_date: 'next_fee_date',
-    monthly_fee: 'monthly_fee',
-    due_amount: 'due_amount',
-    room_id: 'room_id',
-    hostel_id: 'hostel_id',
-    user_fee_receipt: 'user_fee_receipt',
-    payment_status: 'payment_status',
     status: 'status',
     added_date_time: 'added_date_time',
-    modified_date_time: 'modified_date_time'
+    modified_date_time: 'modified_date_time',
+    due_amount: 'due_amount',
+    joining_date: 'joining_date',
+    monthly_fee: 'monthly_fee',
+    next_fee_date: 'next_fee_date',
+    user_fee_receipt: 'user_fee_receipt',
+    hostel_id: 'hostel_id',
+    room_id: 'room_id',
+    user_image: 'user_image',
+    user_name: 'user_name',
+    payment_status: 'payment_status'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const RoomScalarFieldEnum: {
-    room_id: 'room_id',
-    floor_number: 'floor_number',
-    room_number: 'room_number',
-    total_beds: 'total_beds',
-    hostel_id: 'hostel_id',
     status: 'status',
     addedAt: 'addedAt',
-    modifiedAt: 'modifiedAt'
+    modifiedAt: 'modifiedAt',
+    hostel_id: 'hostel_id',
+    room_id: 'room_id',
+    room_number: 'room_number',
+    total_beds: 'total_beds',
+    floor_number: 'floor_number'
   };
 
   export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
@@ -6053,6 +6053,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status[]'
+   */
+  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6081,20 +6095,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Status'
-   */
-  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
-    
-
-
-  /**
-   * Reference to a field of type 'Status[]'
-   */
-  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -6119,9 +6119,9 @@ export namespace Prisma {
     name?: StringFilter<"Hostel"> | string
     address?: StringNullableFilter<"Hostel"> | string | null
     added_date_time?: DateTimeFilter<"Hostel"> | Date | string
-    users?: UserListRelationFilter
-    rooms?: RoomListRelationFilter
     masterUsers?: MasterUserListRelationFilter
+    rooms?: RoomListRelationFilter
+    users?: UserListRelationFilter
   }
 
   export type HostelOrderByWithRelationInput = {
@@ -6129,9 +6129,9 @@ export namespace Prisma {
     name?: SortOrder
     address?: SortOrderInput | SortOrder
     added_date_time?: SortOrder
-    users?: UserOrderByRelationAggregateInput
-    rooms?: RoomOrderByRelationAggregateInput
     masterUsers?: MasterUserOrderByRelationAggregateInput
+    rooms?: RoomOrderByRelationAggregateInput
+    users?: UserOrderByRelationAggregateInput
   }
 
   export type HostelWhereUniqueInput = Prisma.AtLeast<{
@@ -6142,9 +6142,9 @@ export namespace Prisma {
     NOT?: HostelWhereInput | HostelWhereInput[]
     address?: StringNullableFilter<"Hostel"> | string | null
     added_date_time?: DateTimeFilter<"Hostel"> | Date | string
-    users?: UserListRelationFilter
-    rooms?: RoomListRelationFilter
     masterUsers?: MasterUserListRelationFilter
+    rooms?: RoomListRelationFilter
+    users?: UserListRelationFilter
   }, "hostel_id" | "name">
 
   export type HostelOrderByWithAggregationInput = {
@@ -6177,9 +6177,9 @@ export namespace Prisma {
     mobile?: StringFilter<"MasterUser"> | string
     password?: StringFilter<"MasterUser"> | string
     role?: EnumMasterRoleFilter<"MasterUser"> | $Enums.MasterRole
-    hostel_id?: StringFilter<"MasterUser"> | string
     added_date_time?: DateTimeFilter<"MasterUser"> | Date | string
     modified_date_time?: DateTimeFilter<"MasterUser"> | Date | string
+    hostel_id?: StringFilter<"MasterUser"> | string
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
   }
 
@@ -6190,9 +6190,9 @@ export namespace Prisma {
     mobile?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    hostel_id?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    hostel_id?: SortOrder
     hostel?: HostelOrderByWithRelationInput
   }
 
@@ -6208,9 +6208,9 @@ export namespace Prisma {
     mobile?: StringFilter<"MasterUser"> | string
     password?: StringFilter<"MasterUser"> | string
     role?: EnumMasterRoleFilter<"MasterUser"> | $Enums.MasterRole
-    hostel_id?: StringFilter<"MasterUser"> | string
     added_date_time?: DateTimeFilter<"MasterUser"> | Date | string
     modified_date_time?: DateTimeFilter<"MasterUser"> | Date | string
+    hostel_id?: StringFilter<"MasterUser"> | string
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
   }, "master_user_id" | "email" | "hostel_id_email" | "hostel_id_mobile">
 
@@ -6221,9 +6221,9 @@ export namespace Prisma {
     mobile?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    hostel_id?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    hostel_id?: SortOrder
     _count?: MasterUserCountOrderByAggregateInput
     _max?: MasterUserMaxOrderByAggregateInput
     _min?: MasterUserMinOrderByAggregateInput
@@ -6239,9 +6239,9 @@ export namespace Prisma {
     mobile?: StringWithAggregatesFilter<"MasterUser"> | string
     password?: StringWithAggregatesFilter<"MasterUser"> | string
     role?: EnumMasterRoleWithAggregatesFilter<"MasterUser"> | $Enums.MasterRole
-    hostel_id?: StringWithAggregatesFilter<"MasterUser"> | string
     added_date_time?: DateTimeWithAggregatesFilter<"MasterUser"> | Date | string
     modified_date_time?: DateTimeWithAggregatesFilter<"MasterUser"> | Date | string
+    hostel_id?: StringWithAggregatesFilter<"MasterUser"> | string
   }
 
   export type UserWhereInput = {
@@ -6249,44 +6249,44 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     user_id?: StringFilter<"User"> | string
-    user_name?: StringFilter<"User"> | string
     email?: StringNullableFilter<"User"> | string | null
     mobile?: StringFilter<"User"> | string
-    user_image?: StringNullableFilter<"User"> | string | null
-    joining_date?: DateTimeFilter<"User"> | Date | string
-    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
-    monthly_fee?: IntFilter<"User"> | number
-    due_amount?: IntFilter<"User"> | number
-    room_id?: StringNullableFilter<"User"> | string | null
-    hostel_id?: StringFilter<"User"> | string
-    user_fee_receipt?: StringNullableFilter<"User"> | string | null
-    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
     status?: EnumStatusFilter<"User"> | $Enums.Status
     added_date_time?: DateTimeFilter<"User"> | Date | string
     modified_date_time?: DateTimeFilter<"User"> | Date | string
-    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
+    due_amount?: IntFilter<"User"> | number
+    joining_date?: DateTimeFilter<"User"> | Date | string
+    monthly_fee?: IntFilter<"User"> | number
+    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
+    user_fee_receipt?: StringNullableFilter<"User"> | string | null
+    hostel_id?: StringFilter<"User"> | string
+    room_id?: StringNullableFilter<"User"> | string | null
+    user_image?: StringNullableFilter<"User"> | string | null
+    user_name?: StringFilter<"User"> | string
+    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
+    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
     user_id?: SortOrder
-    user_name?: SortOrder
     email?: SortOrderInput | SortOrder
     mobile?: SortOrder
-    user_image?: SortOrderInput | SortOrder
-    joining_date?: SortOrder
-    next_fee_date?: SortOrderInput | SortOrder
-    monthly_fee?: SortOrder
-    due_amount?: SortOrder
-    room_id?: SortOrderInput | SortOrder
-    hostel_id?: SortOrder
-    user_fee_receipt?: SortOrderInput | SortOrder
-    payment_status?: SortOrder
     status?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
-    room?: RoomOrderByWithRelationInput
+    due_amount?: SortOrder
+    joining_date?: SortOrder
+    monthly_fee?: SortOrder
+    next_fee_date?: SortOrderInput | SortOrder
+    user_fee_receipt?: SortOrderInput | SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrderInput | SortOrder
+    user_image?: SortOrderInput | SortOrder
+    user_name?: SortOrder
+    payment_status?: SortOrder
     hostel?: HostelOrderByWithRelationInput
+    room?: RoomOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6296,42 +6296,42 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    user_name?: StringFilter<"User"> | string
     email?: StringNullableFilter<"User"> | string | null
     mobile?: StringFilter<"User"> | string
-    user_image?: StringNullableFilter<"User"> | string | null
-    joining_date?: DateTimeFilter<"User"> | Date | string
-    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
-    monthly_fee?: IntFilter<"User"> | number
-    due_amount?: IntFilter<"User"> | number
-    room_id?: StringNullableFilter<"User"> | string | null
-    hostel_id?: StringFilter<"User"> | string
-    user_fee_receipt?: StringNullableFilter<"User"> | string | null
-    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
     status?: EnumStatusFilter<"User"> | $Enums.Status
     added_date_time?: DateTimeFilter<"User"> | Date | string
     modified_date_time?: DateTimeFilter<"User"> | Date | string
-    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
+    due_amount?: IntFilter<"User"> | number
+    joining_date?: DateTimeFilter<"User"> | Date | string
+    monthly_fee?: IntFilter<"User"> | number
+    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
+    user_fee_receipt?: StringNullableFilter<"User"> | string | null
+    hostel_id?: StringFilter<"User"> | string
+    room_id?: StringNullableFilter<"User"> | string | null
+    user_image?: StringNullableFilter<"User"> | string | null
+    user_name?: StringFilter<"User"> | string
+    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
+    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
   }, "user_id" | "hostel_id_email" | "hostel_id_mobile">
 
   export type UserOrderByWithAggregationInput = {
     user_id?: SortOrder
-    user_name?: SortOrder
     email?: SortOrderInput | SortOrder
     mobile?: SortOrder
-    user_image?: SortOrderInput | SortOrder
-    joining_date?: SortOrder
-    next_fee_date?: SortOrderInput | SortOrder
-    monthly_fee?: SortOrder
-    due_amount?: SortOrder
-    room_id?: SortOrderInput | SortOrder
-    hostel_id?: SortOrder
-    user_fee_receipt?: SortOrderInput | SortOrder
-    payment_status?: SortOrder
     status?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    due_amount?: SortOrder
+    joining_date?: SortOrder
+    monthly_fee?: SortOrder
+    next_fee_date?: SortOrderInput | SortOrder
+    user_fee_receipt?: SortOrderInput | SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrderInput | SortOrder
+    user_image?: SortOrderInput | SortOrder
+    user_name?: SortOrder
+    payment_status?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -6344,48 +6344,48 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     user_id?: StringWithAggregatesFilter<"User"> | string
-    user_name?: StringWithAggregatesFilter<"User"> | string
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     mobile?: StringWithAggregatesFilter<"User"> | string
-    user_image?: StringNullableWithAggregatesFilter<"User"> | string | null
-    joining_date?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    next_fee_date?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    monthly_fee?: IntWithAggregatesFilter<"User"> | number
-    due_amount?: IntWithAggregatesFilter<"User"> | number
-    room_id?: StringNullableWithAggregatesFilter<"User"> | string | null
-    hostel_id?: StringWithAggregatesFilter<"User"> | string
-    user_fee_receipt?: StringNullableWithAggregatesFilter<"User"> | string | null
-    payment_status?: EnumPaymentStatusWithAggregatesFilter<"User"> | $Enums.PaymentStatus
     status?: EnumStatusWithAggregatesFilter<"User"> | $Enums.Status
     added_date_time?: DateTimeWithAggregatesFilter<"User"> | Date | string
     modified_date_time?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    due_amount?: IntWithAggregatesFilter<"User"> | number
+    joining_date?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    monthly_fee?: IntWithAggregatesFilter<"User"> | number
+    next_fee_date?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    user_fee_receipt?: StringNullableWithAggregatesFilter<"User"> | string | null
+    hostel_id?: StringWithAggregatesFilter<"User"> | string
+    room_id?: StringNullableWithAggregatesFilter<"User"> | string | null
+    user_image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    user_name?: StringWithAggregatesFilter<"User"> | string
+    payment_status?: EnumPaymentStatusWithAggregatesFilter<"User"> | $Enums.PaymentStatus
   }
 
   export type RoomWhereInput = {
     AND?: RoomWhereInput | RoomWhereInput[]
     OR?: RoomWhereInput[]
     NOT?: RoomWhereInput | RoomWhereInput[]
-    room_id?: StringFilter<"Room"> | string
-    floor_number?: StringNullableFilter<"Room"> | string | null
-    room_number?: StringFilter<"Room"> | string
-    total_beds?: IntFilter<"Room"> | number
-    hostel_id?: StringFilter<"Room"> | string
     status?: EnumStatusFilter<"Room"> | $Enums.Status
     addedAt?: DateTimeFilter<"Room"> | Date | string
     modifiedAt?: DateTimeFilter<"Room"> | Date | string
+    hostel_id?: StringFilter<"Room"> | string
+    room_id?: StringFilter<"Room"> | string
+    room_number?: StringFilter<"Room"> | string
+    total_beds?: IntFilter<"Room"> | number
+    floor_number?: StringNullableFilter<"Room"> | string | null
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
     users?: UserListRelationFilter
   }
 
   export type RoomOrderByWithRelationInput = {
-    room_id?: SortOrder
-    floor_number?: SortOrderInput | SortOrder
-    room_number?: SortOrder
-    total_beds?: SortOrder
-    hostel_id?: SortOrder
     status?: SortOrder
     addedAt?: SortOrder
     modifiedAt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    room_number?: SortOrder
+    total_beds?: SortOrder
+    floor_number?: SortOrderInput | SortOrder
     hostel?: HostelOrderByWithRelationInput
     users?: UserOrderByRelationAggregateInput
   }
@@ -6396,26 +6396,26 @@ export namespace Prisma {
     AND?: RoomWhereInput | RoomWhereInput[]
     OR?: RoomWhereInput[]
     NOT?: RoomWhereInput | RoomWhereInput[]
-    floor_number?: StringNullableFilter<"Room"> | string | null
-    room_number?: StringFilter<"Room"> | string
-    total_beds?: IntFilter<"Room"> | number
-    hostel_id?: StringFilter<"Room"> | string
     status?: EnumStatusFilter<"Room"> | $Enums.Status
     addedAt?: DateTimeFilter<"Room"> | Date | string
     modifiedAt?: DateTimeFilter<"Room"> | Date | string
+    hostel_id?: StringFilter<"Room"> | string
+    room_number?: StringFilter<"Room"> | string
+    total_beds?: IntFilter<"Room"> | number
+    floor_number?: StringNullableFilter<"Room"> | string | null
     hostel?: XOR<HostelScalarRelationFilter, HostelWhereInput>
     users?: UserListRelationFilter
   }, "room_id" | "hostel_id_room_number">
 
   export type RoomOrderByWithAggregationInput = {
-    room_id?: SortOrder
-    floor_number?: SortOrderInput | SortOrder
-    room_number?: SortOrder
-    total_beds?: SortOrder
-    hostel_id?: SortOrder
     status?: SortOrder
     addedAt?: SortOrder
     modifiedAt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    room_number?: SortOrder
+    total_beds?: SortOrder
+    floor_number?: SortOrderInput | SortOrder
     _count?: RoomCountOrderByAggregateInput
     _avg?: RoomAvgOrderByAggregateInput
     _max?: RoomMaxOrderByAggregateInput
@@ -6427,14 +6427,14 @@ export namespace Prisma {
     AND?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
     OR?: RoomScalarWhereWithAggregatesInput[]
     NOT?: RoomScalarWhereWithAggregatesInput | RoomScalarWhereWithAggregatesInput[]
-    room_id?: StringWithAggregatesFilter<"Room"> | string
-    floor_number?: StringNullableWithAggregatesFilter<"Room"> | string | null
-    room_number?: StringWithAggregatesFilter<"Room"> | string
-    total_beds?: IntWithAggregatesFilter<"Room"> | number
-    hostel_id?: StringWithAggregatesFilter<"Room"> | string
     status?: EnumStatusWithAggregatesFilter<"Room"> | $Enums.Status
     addedAt?: DateTimeWithAggregatesFilter<"Room"> | Date | string
     modifiedAt?: DateTimeWithAggregatesFilter<"Room"> | Date | string
+    hostel_id?: StringWithAggregatesFilter<"Room"> | string
+    room_id?: StringWithAggregatesFilter<"Room"> | string
+    room_number?: StringWithAggregatesFilter<"Room"> | string
+    total_beds?: IntWithAggregatesFilter<"Room"> | number
+    floor_number?: StringNullableWithAggregatesFilter<"Room"> | string | null
   }
 
   export type HostelCreateInput = {
@@ -6442,9 +6442,9 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserCreateNestedManyWithoutHostelInput
-    rooms?: RoomCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserCreateNestedManyWithoutHostelInput
+    rooms?: RoomCreateNestedManyWithoutHostelInput
+    users?: UserCreateNestedManyWithoutHostelInput
   }
 
   export type HostelUncheckedCreateInput = {
@@ -6452,9 +6452,9 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutHostelInput
-    rooms?: RoomUncheckedCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserUncheckedCreateNestedManyWithoutHostelInput
+    rooms?: RoomUncheckedCreateNestedManyWithoutHostelInput
+    users?: UserUncheckedCreateNestedManyWithoutHostelInput
   }
 
   export type HostelUpdateInput = {
@@ -6462,9 +6462,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutHostelNestedInput
-    rooms?: RoomUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUpdateManyWithoutHostelNestedInput
+    rooms?: RoomUpdateManyWithoutHostelNestedInput
+    users?: UserUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelUncheckedUpdateInput = {
@@ -6472,9 +6472,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
-    rooms?: RoomUncheckedUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUncheckedUpdateManyWithoutHostelNestedInput
+    rooms?: RoomUncheckedUpdateManyWithoutHostelNestedInput
+    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelCreateManyInput = {
@@ -6517,9 +6517,9 @@ export namespace Prisma {
     mobile: string
     password: string
     role?: $Enums.MasterRole
-    hostel_id: string
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    hostel_id: string
   }
 
   export type MasterUserUpdateInput = {
@@ -6541,9 +6541,9 @@ export namespace Prisma {
     mobile?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumMasterRoleFieldUpdateOperationsInput | $Enums.MasterRole
-    hostel_id?: StringFieldUpdateOperationsInput | string
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostel_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type MasterUserCreateManyInput = {
@@ -6553,9 +6553,9 @@ export namespace Prisma {
     mobile: string
     password: string
     role?: $Enums.MasterRole
-    hostel_id: string
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    hostel_id: string
   }
 
   export type MasterUserUpdateManyMutationInput = {
@@ -6576,220 +6576,220 @@ export namespace Prisma {
     mobile?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumMasterRoleFieldUpdateOperationsInput | $Enums.MasterRole
-    hostel_id?: StringFieldUpdateOperationsInput | string
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostel_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
-    room?: RoomCreateNestedOneWithoutUsersInput
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
     hostel: HostelCreateNestedOneWithoutUsersInput
+    room?: RoomCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    room_id?: string | null
-    hostel_id: string
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    hostel_id: string
+    room_id?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
   }
 
   export type UserUpdateInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    room?: RoomUpdateOneWithoutUsersNestedInput
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     hostel?: HostelUpdateOneRequiredWithoutUsersNestedInput
+    room?: RoomUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    room_id?: NullableStringFieldUpdateOperationsInput | string | null
-    hostel_id?: StringFieldUpdateOperationsInput | string
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    room_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   }
 
   export type UserCreateManyInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    room_id?: string | null
-    hostel_id: string
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    hostel_id: string
+    room_id?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
   }
 
   export type UserUpdateManyMutationInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   }
 
   export type UserUncheckedUpdateManyInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    room_id?: NullableStringFieldUpdateOperationsInput | string | null
-    hostel_id?: StringFieldUpdateOperationsInput | string
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    room_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   }
 
   export type RoomCreateInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
     status?: $Enums.Status
     addedAt?: Date | string
     modifiedAt?: Date | string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
     hostel: HostelCreateNestedOneWithoutRoomsInput
     users?: UserCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    hostel_id: string
     status?: $Enums.Status
     addedAt?: Date | string
     modifiedAt?: Date | string
+    hostel_id: string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
     users?: UserUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUpdateInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
     hostel?: HostelUpdateOneRequiredWithoutRoomsNestedInput
     users?: UserUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    hostel_id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomCreateManyInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    hostel_id: string
     status?: $Enums.Status
     addedAt?: Date | string
     modifiedAt?: Date | string
+    hostel_id: string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
   }
 
   export type RoomUpdateManyMutationInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoomUncheckedUpdateManyInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    hostel_id?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6833,10 +6833,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
+  export type MasterUserListRelationFilter = {
+    every?: MasterUserWhereInput
+    some?: MasterUserWhereInput
+    none?: MasterUserWhereInput
   }
 
   export type RoomListRelationFilter = {
@@ -6845,10 +6845,10 @@ export namespace Prisma {
     none?: RoomWhereInput
   }
 
-  export type MasterUserListRelationFilter = {
-    every?: MasterUserWhereInput
-    some?: MasterUserWhereInput
-    none?: MasterUserWhereInput
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
   }
 
   export type SortOrderInput = {
@@ -6856,7 +6856,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type UserOrderByRelationAggregateInput = {
+  export type MasterUserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6864,7 +6864,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type MasterUserOrderByRelationAggregateInput = {
+  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6968,9 +6968,9 @@ export namespace Prisma {
     mobile?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    hostel_id?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    hostel_id?: SortOrder
   }
 
   export type MasterUserMaxOrderByAggregateInput = {
@@ -6980,9 +6980,9 @@ export namespace Prisma {
     mobile?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    hostel_id?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    hostel_id?: SortOrder
   }
 
   export type MasterUserMinOrderByAggregateInput = {
@@ -6992,9 +6992,9 @@ export namespace Prisma {
     mobile?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    hostel_id?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    hostel_id?: SortOrder
   }
 
   export type EnumMasterRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -7007,15 +7007,11 @@ export namespace Prisma {
     _max?: NestedEnumMasterRoleFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7029,18 +7025,22 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type EnumPaymentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
-  }
-
-  export type EnumStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
   export type RoomNullableScalarRelationFilter = {
@@ -7060,83 +7060,79 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     user_id?: SortOrder
-    user_name?: SortOrder
     email?: SortOrder
     mobile?: SortOrder
-    user_image?: SortOrder
-    joining_date?: SortOrder
-    next_fee_date?: SortOrder
-    monthly_fee?: SortOrder
-    due_amount?: SortOrder
-    room_id?: SortOrder
-    hostel_id?: SortOrder
-    user_fee_receipt?: SortOrder
-    payment_status?: SortOrder
     status?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    due_amount?: SortOrder
+    joining_date?: SortOrder
+    monthly_fee?: SortOrder
+    next_fee_date?: SortOrder
+    user_fee_receipt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    user_image?: SortOrder
+    user_name?: SortOrder
+    payment_status?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
-    monthly_fee?: SortOrder
     due_amount?: SortOrder
+    monthly_fee?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     user_id?: SortOrder
-    user_name?: SortOrder
     email?: SortOrder
     mobile?: SortOrder
-    user_image?: SortOrder
-    joining_date?: SortOrder
-    next_fee_date?: SortOrder
-    monthly_fee?: SortOrder
-    due_amount?: SortOrder
-    room_id?: SortOrder
-    hostel_id?: SortOrder
-    user_fee_receipt?: SortOrder
-    payment_status?: SortOrder
     status?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    due_amount?: SortOrder
+    joining_date?: SortOrder
+    monthly_fee?: SortOrder
+    next_fee_date?: SortOrder
+    user_fee_receipt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    user_image?: SortOrder
+    user_name?: SortOrder
+    payment_status?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     user_id?: SortOrder
-    user_name?: SortOrder
     email?: SortOrder
     mobile?: SortOrder
-    user_image?: SortOrder
-    joining_date?: SortOrder
-    next_fee_date?: SortOrder
-    monthly_fee?: SortOrder
-    due_amount?: SortOrder
-    room_id?: SortOrder
-    hostel_id?: SortOrder
-    user_fee_receipt?: SortOrder
-    payment_status?: SortOrder
     status?: SortOrder
     added_date_time?: SortOrder
     modified_date_time?: SortOrder
+    due_amount?: SortOrder
+    joining_date?: SortOrder
+    monthly_fee?: SortOrder
+    next_fee_date?: SortOrder
+    user_fee_receipt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    user_image?: SortOrder
+    user_name?: SortOrder
+    payment_status?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
-    monthly_fee?: SortOrder
     due_amount?: SortOrder
+    monthly_fee?: SortOrder
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7155,6 +7151,20 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type EnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
@@ -7165,30 +7175,20 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
-  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
   export type RoomHostel_idRoom_numberCompoundUniqueInput = {
     hostel_id: string
     room_number: string
   }
 
   export type RoomCountOrderByAggregateInput = {
-    room_id?: SortOrder
-    floor_number?: SortOrder
-    room_number?: SortOrder
-    total_beds?: SortOrder
-    hostel_id?: SortOrder
     status?: SortOrder
     addedAt?: SortOrder
     modifiedAt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    room_number?: SortOrder
+    total_beds?: SortOrder
+    floor_number?: SortOrder
   }
 
   export type RoomAvgOrderByAggregateInput = {
@@ -7196,43 +7196,29 @@ export namespace Prisma {
   }
 
   export type RoomMaxOrderByAggregateInput = {
-    room_id?: SortOrder
-    floor_number?: SortOrder
-    room_number?: SortOrder
-    total_beds?: SortOrder
-    hostel_id?: SortOrder
     status?: SortOrder
     addedAt?: SortOrder
     modifiedAt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    room_number?: SortOrder
+    total_beds?: SortOrder
+    floor_number?: SortOrder
   }
 
   export type RoomMinOrderByAggregateInput = {
-    room_id?: SortOrder
-    floor_number?: SortOrder
-    room_number?: SortOrder
-    total_beds?: SortOrder
-    hostel_id?: SortOrder
     status?: SortOrder
     addedAt?: SortOrder
     modifiedAt?: SortOrder
+    hostel_id?: SortOrder
+    room_id?: SortOrder
+    room_number?: SortOrder
+    total_beds?: SortOrder
+    floor_number?: SortOrder
   }
 
   export type RoomSumOrderByAggregateInput = {
     total_beds?: SortOrder
-  }
-
-  export type UserCreateNestedManyWithoutHostelInput = {
-    create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
-    createMany?: UserCreateManyHostelInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type RoomCreateNestedManyWithoutHostelInput = {
-    create?: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput> | RoomCreateWithoutHostelInput[] | RoomUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: RoomCreateOrConnectWithoutHostelInput | RoomCreateOrConnectWithoutHostelInput[]
-    createMany?: RoomCreateManyHostelInputEnvelope
-    connect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
   }
 
   export type MasterUserCreateNestedManyWithoutHostelInput = {
@@ -7242,11 +7228,25 @@ export namespace Prisma {
     connect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
   }
 
-  export type UserUncheckedCreateNestedManyWithoutHostelInput = {
+  export type RoomCreateNestedManyWithoutHostelInput = {
+    create?: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput> | RoomCreateWithoutHostelInput[] | RoomUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: RoomCreateOrConnectWithoutHostelInput | RoomCreateOrConnectWithoutHostelInput[]
+    createMany?: RoomCreateManyHostelInputEnvelope
+    connect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutHostelInput = {
     create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
     connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
     createMany?: UserCreateManyHostelInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type MasterUserUncheckedCreateNestedManyWithoutHostelInput = {
+    create?: XOR<MasterUserCreateWithoutHostelInput, MasterUserUncheckedCreateWithoutHostelInput> | MasterUserCreateWithoutHostelInput[] | MasterUserUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: MasterUserCreateOrConnectWithoutHostelInput | MasterUserCreateOrConnectWithoutHostelInput[]
+    createMany?: MasterUserCreateManyHostelInputEnvelope
+    connect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
   }
 
   export type RoomUncheckedCreateNestedManyWithoutHostelInput = {
@@ -7256,11 +7256,11 @@ export namespace Prisma {
     connect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
   }
 
-  export type MasterUserUncheckedCreateNestedManyWithoutHostelInput = {
-    create?: XOR<MasterUserCreateWithoutHostelInput, MasterUserUncheckedCreateWithoutHostelInput> | MasterUserCreateWithoutHostelInput[] | MasterUserUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: MasterUserCreateOrConnectWithoutHostelInput | MasterUserCreateOrConnectWithoutHostelInput[]
-    createMany?: MasterUserCreateManyHostelInputEnvelope
-    connect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
+  export type UserUncheckedCreateNestedManyWithoutHostelInput = {
+    create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
+    createMany?: UserCreateManyHostelInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7273,34 +7273,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type UserUpdateManyWithoutHostelNestedInput = {
-    create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutHostelInput | UserUpsertWithWhereUniqueWithoutHostelInput[]
-    createMany?: UserCreateManyHostelInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutHostelInput | UserUpdateWithWhereUniqueWithoutHostelInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutHostelInput | UserUpdateManyWithWhereWithoutHostelInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type RoomUpdateManyWithoutHostelNestedInput = {
-    create?: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput> | RoomCreateWithoutHostelInput[] | RoomUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: RoomCreateOrConnectWithoutHostelInput | RoomCreateOrConnectWithoutHostelInput[]
-    upsert?: RoomUpsertWithWhereUniqueWithoutHostelInput | RoomUpsertWithWhereUniqueWithoutHostelInput[]
-    createMany?: RoomCreateManyHostelInputEnvelope
-    set?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
-    disconnect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
-    delete?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
-    connect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
-    update?: RoomUpdateWithWhereUniqueWithoutHostelInput | RoomUpdateWithWhereUniqueWithoutHostelInput[]
-    updateMany?: RoomUpdateManyWithWhereWithoutHostelInput | RoomUpdateManyWithWhereWithoutHostelInput[]
-    deleteMany?: RoomScalarWhereInput | RoomScalarWhereInput[]
   }
 
   export type MasterUserUpdateManyWithoutHostelNestedInput = {
@@ -7317,7 +7289,21 @@ export namespace Prisma {
     deleteMany?: MasterUserScalarWhereInput | MasterUserScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutHostelNestedInput = {
+  export type RoomUpdateManyWithoutHostelNestedInput = {
+    create?: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput> | RoomCreateWithoutHostelInput[] | RoomUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: RoomCreateOrConnectWithoutHostelInput | RoomCreateOrConnectWithoutHostelInput[]
+    upsert?: RoomUpsertWithWhereUniqueWithoutHostelInput | RoomUpsertWithWhereUniqueWithoutHostelInput[]
+    createMany?: RoomCreateManyHostelInputEnvelope
+    set?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
+    disconnect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
+    delete?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
+    connect?: RoomWhereUniqueInput | RoomWhereUniqueInput[]
+    update?: RoomUpdateWithWhereUniqueWithoutHostelInput | RoomUpdateWithWhereUniqueWithoutHostelInput[]
+    updateMany?: RoomUpdateManyWithWhereWithoutHostelInput | RoomUpdateManyWithWhereWithoutHostelInput[]
+    deleteMany?: RoomScalarWhereInput | RoomScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutHostelNestedInput = {
     create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
     connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
     upsert?: UserUpsertWithWhereUniqueWithoutHostelInput | UserUpsertWithWhereUniqueWithoutHostelInput[]
@@ -7329,6 +7315,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutHostelInput | UserUpdateWithWhereUniqueWithoutHostelInput[]
     updateMany?: UserUpdateManyWithWhereWithoutHostelInput | UserUpdateManyWithWhereWithoutHostelInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type MasterUserUncheckedUpdateManyWithoutHostelNestedInput = {
+    create?: XOR<MasterUserCreateWithoutHostelInput, MasterUserUncheckedCreateWithoutHostelInput> | MasterUserCreateWithoutHostelInput[] | MasterUserUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: MasterUserCreateOrConnectWithoutHostelInput | MasterUserCreateOrConnectWithoutHostelInput[]
+    upsert?: MasterUserUpsertWithWhereUniqueWithoutHostelInput | MasterUserUpsertWithWhereUniqueWithoutHostelInput[]
+    createMany?: MasterUserCreateManyHostelInputEnvelope
+    set?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
+    disconnect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
+    delete?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
+    connect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
+    update?: MasterUserUpdateWithWhereUniqueWithoutHostelInput | MasterUserUpdateWithWhereUniqueWithoutHostelInput[]
+    updateMany?: MasterUserUpdateManyWithWhereWithoutHostelInput | MasterUserUpdateManyWithWhereWithoutHostelInput[]
+    deleteMany?: MasterUserScalarWhereInput | MasterUserScalarWhereInput[]
   }
 
   export type RoomUncheckedUpdateManyWithoutHostelNestedInput = {
@@ -7345,18 +7345,18 @@ export namespace Prisma {
     deleteMany?: RoomScalarWhereInput | RoomScalarWhereInput[]
   }
 
-  export type MasterUserUncheckedUpdateManyWithoutHostelNestedInput = {
-    create?: XOR<MasterUserCreateWithoutHostelInput, MasterUserUncheckedCreateWithoutHostelInput> | MasterUserCreateWithoutHostelInput[] | MasterUserUncheckedCreateWithoutHostelInput[]
-    connectOrCreate?: MasterUserCreateOrConnectWithoutHostelInput | MasterUserCreateOrConnectWithoutHostelInput[]
-    upsert?: MasterUserUpsertWithWhereUniqueWithoutHostelInput | MasterUserUpsertWithWhereUniqueWithoutHostelInput[]
-    createMany?: MasterUserCreateManyHostelInputEnvelope
-    set?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
-    disconnect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
-    delete?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
-    connect?: MasterUserWhereUniqueInput | MasterUserWhereUniqueInput[]
-    update?: MasterUserUpdateWithWhereUniqueWithoutHostelInput | MasterUserUpdateWithWhereUniqueWithoutHostelInput[]
-    updateMany?: MasterUserUpdateManyWithWhereWithoutHostelInput | MasterUserUpdateManyWithWhereWithoutHostelInput[]
-    deleteMany?: MasterUserScalarWhereInput | MasterUserScalarWhereInput[]
+  export type UserUncheckedUpdateManyWithoutHostelNestedInput = {
+    create?: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput> | UserCreateWithoutHostelInput[] | UserUncheckedCreateWithoutHostelInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutHostelInput | UserCreateOrConnectWithoutHostelInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutHostelInput | UserUpsertWithWhereUniqueWithoutHostelInput[]
+    createMany?: UserCreateManyHostelInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutHostelInput | UserUpdateWithWhereUniqueWithoutHostelInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutHostelInput | UserUpdateManyWithWhereWithoutHostelInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type HostelCreateNestedOneWithoutMasterUsersInput = {
@@ -7377,20 +7377,20 @@ export namespace Prisma {
     update?: XOR<XOR<HostelUpdateToOneWithWhereWithoutMasterUsersInput, HostelUpdateWithoutMasterUsersInput>, HostelUncheckedUpdateWithoutMasterUsersInput>
   }
 
-  export type RoomCreateNestedOneWithoutUsersInput = {
-    create?: XOR<RoomCreateWithoutUsersInput, RoomUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: RoomCreateOrConnectWithoutUsersInput
-    connect?: RoomWhereUniqueInput
-  }
-
   export type HostelCreateNestedOneWithoutUsersInput = {
     create?: XOR<HostelCreateWithoutUsersInput, HostelUncheckedCreateWithoutUsersInput>
     connectOrCreate?: HostelCreateOrConnectWithoutUsersInput
     connect?: HostelWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
+  export type RoomCreateNestedOneWithoutUsersInput = {
+    create?: XOR<RoomCreateWithoutUsersInput, RoomUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: RoomCreateOrConnectWithoutUsersInput
+    connect?: RoomWhereUniqueInput
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -7401,12 +7401,20 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type EnumPaymentStatusFieldUpdateOperationsInput = {
     set?: $Enums.PaymentStatus
   }
 
-  export type EnumStatusFieldUpdateOperationsInput = {
-    set?: $Enums.Status
+  export type HostelUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<HostelCreateWithoutUsersInput, HostelUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: HostelCreateOrConnectWithoutUsersInput
+    upsert?: HostelUpsertWithoutUsersInput
+    connect?: HostelWhereUniqueInput
+    update?: XOR<XOR<HostelUpdateToOneWithWhereWithoutUsersInput, HostelUpdateWithoutUsersInput>, HostelUncheckedUpdateWithoutUsersInput>
   }
 
   export type RoomUpdateOneWithoutUsersNestedInput = {
@@ -7417,14 +7425,6 @@ export namespace Prisma {
     delete?: RoomWhereInput | boolean
     connect?: RoomWhereUniqueInput
     update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutUsersInput, RoomUpdateWithoutUsersInput>, RoomUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type HostelUpdateOneRequiredWithoutUsersNestedInput = {
-    create?: XOR<HostelCreateWithoutUsersInput, HostelUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: HostelCreateOrConnectWithoutUsersInput
-    upsert?: HostelUpsertWithoutUsersInput
-    connect?: HostelWhereUniqueInput
-    update?: XOR<XOR<HostelUpdateToOneWithWhereWithoutUsersInput, HostelUpdateWithoutUsersInput>, HostelUncheckedUpdateWithoutUsersInput>
   }
 
   export type HostelCreateNestedOneWithoutRoomsInput = {
@@ -7609,6 +7609,13 @@ export namespace Prisma {
     _max?: NestedEnumMasterRoleFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -7627,25 +7634,14 @@ export namespace Prisma {
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
   }
 
-  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7675,6 +7671,20 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
@@ -7683,94 +7693,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
-  }
-
-  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type UserCreateWithoutHostelInput = {
-    user_id?: string
-    user_name: string
-    email?: string | null
-    mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
-    status?: $Enums.Status
-    added_date_time?: Date | string
-    modified_date_time?: Date | string
-    room?: RoomCreateNestedOneWithoutUsersInput
-  }
-
-  export type UserUncheckedCreateWithoutHostelInput = {
-    user_id?: string
-    user_name: string
-    email?: string | null
-    mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    room_id?: string | null
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
-    status?: $Enums.Status
-    added_date_time?: Date | string
-    modified_date_time?: Date | string
-  }
-
-  export type UserCreateOrConnectWithoutHostelInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput>
-  }
-
-  export type UserCreateManyHostelInputEnvelope = {
-    data: UserCreateManyHostelInput | UserCreateManyHostelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RoomCreateWithoutHostelInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    status?: $Enums.Status
-    addedAt?: Date | string
-    modifiedAt?: Date | string
-    users?: UserCreateNestedManyWithoutRoomInput
-  }
-
-  export type RoomUncheckedCreateWithoutHostelInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    status?: $Enums.Status
-    addedAt?: Date | string
-    modifiedAt?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutRoomInput
-  }
-
-  export type RoomCreateOrConnectWithoutHostelInput = {
-    where: RoomWhereUniqueInput
-    create: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput>
-  }
-
-  export type RoomCreateManyHostelInputEnvelope = {
-    data: RoomCreateManyHostelInput | RoomCreateManyHostelInput[]
-    skipDuplicates?: boolean
   }
 
   export type MasterUserCreateWithoutHostelInput = {
@@ -7805,72 +7727,82 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithWhereUniqueWithoutHostelInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutHostelInput, UserUncheckedUpdateWithoutHostelInput>
-    create: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput>
+  export type RoomCreateWithoutHostelInput = {
+    status?: $Enums.Status
+    addedAt?: Date | string
+    modifiedAt?: Date | string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
+    users?: UserCreateNestedManyWithoutRoomInput
   }
 
-  export type UserUpdateWithWhereUniqueWithoutHostelInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutHostelInput, UserUncheckedUpdateWithoutHostelInput>
+  export type RoomUncheckedCreateWithoutHostelInput = {
+    status?: $Enums.Status
+    addedAt?: Date | string
+    modifiedAt?: Date | string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
+    users?: UserUncheckedCreateNestedManyWithoutRoomInput
   }
 
-  export type UserUpdateManyWithWhereWithoutHostelInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutHostelInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    user_id?: StringFilter<"User"> | string
-    user_name?: StringFilter<"User"> | string
-    email?: StringNullableFilter<"User"> | string | null
-    mobile?: StringFilter<"User"> | string
-    user_image?: StringNullableFilter<"User"> | string | null
-    joining_date?: DateTimeFilter<"User"> | Date | string
-    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
-    monthly_fee?: IntFilter<"User"> | number
-    due_amount?: IntFilter<"User"> | number
-    room_id?: StringNullableFilter<"User"> | string | null
-    hostel_id?: StringFilter<"User"> | string
-    user_fee_receipt?: StringNullableFilter<"User"> | string | null
-    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
-    status?: EnumStatusFilter<"User"> | $Enums.Status
-    added_date_time?: DateTimeFilter<"User"> | Date | string
-    modified_date_time?: DateTimeFilter<"User"> | Date | string
-  }
-
-  export type RoomUpsertWithWhereUniqueWithoutHostelInput = {
+  export type RoomCreateOrConnectWithoutHostelInput = {
     where: RoomWhereUniqueInput
-    update: XOR<RoomUpdateWithoutHostelInput, RoomUncheckedUpdateWithoutHostelInput>
     create: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput>
   }
 
-  export type RoomUpdateWithWhereUniqueWithoutHostelInput = {
-    where: RoomWhereUniqueInput
-    data: XOR<RoomUpdateWithoutHostelInput, RoomUncheckedUpdateWithoutHostelInput>
+  export type RoomCreateManyHostelInputEnvelope = {
+    data: RoomCreateManyHostelInput | RoomCreateManyHostelInput[]
+    skipDuplicates?: boolean
   }
 
-  export type RoomUpdateManyWithWhereWithoutHostelInput = {
-    where: RoomScalarWhereInput
-    data: XOR<RoomUpdateManyMutationInput, RoomUncheckedUpdateManyWithoutHostelInput>
+  export type UserCreateWithoutHostelInput = {
+    user_id?: string
+    email?: string | null
+    mobile: string
+    status?: $Enums.Status
+    added_date_time?: Date | string
+    modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
+    room?: RoomCreateNestedOneWithoutUsersInput
   }
 
-  export type RoomScalarWhereInput = {
-    AND?: RoomScalarWhereInput | RoomScalarWhereInput[]
-    OR?: RoomScalarWhereInput[]
-    NOT?: RoomScalarWhereInput | RoomScalarWhereInput[]
-    room_id?: StringFilter<"Room"> | string
-    floor_number?: StringNullableFilter<"Room"> | string | null
-    room_number?: StringFilter<"Room"> | string
-    total_beds?: IntFilter<"Room"> | number
-    hostel_id?: StringFilter<"Room"> | string
-    status?: EnumStatusFilter<"Room"> | $Enums.Status
-    addedAt?: DateTimeFilter<"Room"> | Date | string
-    modifiedAt?: DateTimeFilter<"Room"> | Date | string
+  export type UserUncheckedCreateWithoutHostelInput = {
+    user_id?: string
+    email?: string | null
+    mobile: string
+    status?: $Enums.Status
+    added_date_time?: Date | string
+    modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    room_id?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
+  }
+
+  export type UserCreateOrConnectWithoutHostelInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput>
+  }
+
+  export type UserCreateManyHostelInputEnvelope = {
+    data: UserCreateManyHostelInput | UserCreateManyHostelInput[]
+    skipDuplicates?: boolean
   }
 
   export type MasterUserUpsertWithWhereUniqueWithoutHostelInput = {
@@ -7899,9 +7831,77 @@ export namespace Prisma {
     mobile?: StringFilter<"MasterUser"> | string
     password?: StringFilter<"MasterUser"> | string
     role?: EnumMasterRoleFilter<"MasterUser"> | $Enums.MasterRole
-    hostel_id?: StringFilter<"MasterUser"> | string
     added_date_time?: DateTimeFilter<"MasterUser"> | Date | string
     modified_date_time?: DateTimeFilter<"MasterUser"> | Date | string
+    hostel_id?: StringFilter<"MasterUser"> | string
+  }
+
+  export type RoomUpsertWithWhereUniqueWithoutHostelInput = {
+    where: RoomWhereUniqueInput
+    update: XOR<RoomUpdateWithoutHostelInput, RoomUncheckedUpdateWithoutHostelInput>
+    create: XOR<RoomCreateWithoutHostelInput, RoomUncheckedCreateWithoutHostelInput>
+  }
+
+  export type RoomUpdateWithWhereUniqueWithoutHostelInput = {
+    where: RoomWhereUniqueInput
+    data: XOR<RoomUpdateWithoutHostelInput, RoomUncheckedUpdateWithoutHostelInput>
+  }
+
+  export type RoomUpdateManyWithWhereWithoutHostelInput = {
+    where: RoomScalarWhereInput
+    data: XOR<RoomUpdateManyMutationInput, RoomUncheckedUpdateManyWithoutHostelInput>
+  }
+
+  export type RoomScalarWhereInput = {
+    AND?: RoomScalarWhereInput | RoomScalarWhereInput[]
+    OR?: RoomScalarWhereInput[]
+    NOT?: RoomScalarWhereInput | RoomScalarWhereInput[]
+    status?: EnumStatusFilter<"Room"> | $Enums.Status
+    addedAt?: DateTimeFilter<"Room"> | Date | string
+    modifiedAt?: DateTimeFilter<"Room"> | Date | string
+    hostel_id?: StringFilter<"Room"> | string
+    room_id?: StringFilter<"Room"> | string
+    room_number?: StringFilter<"Room"> | string
+    total_beds?: IntFilter<"Room"> | number
+    floor_number?: StringNullableFilter<"Room"> | string | null
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutHostelInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutHostelInput, UserUncheckedUpdateWithoutHostelInput>
+    create: XOR<UserCreateWithoutHostelInput, UserUncheckedCreateWithoutHostelInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutHostelInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutHostelInput, UserUncheckedUpdateWithoutHostelInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutHostelInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutHostelInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    user_id?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
+    mobile?: StringFilter<"User"> | string
+    status?: EnumStatusFilter<"User"> | $Enums.Status
+    added_date_time?: DateTimeFilter<"User"> | Date | string
+    modified_date_time?: DateTimeFilter<"User"> | Date | string
+    due_amount?: IntFilter<"User"> | number
+    joining_date?: DateTimeFilter<"User"> | Date | string
+    monthly_fee?: IntFilter<"User"> | number
+    next_fee_date?: DateTimeNullableFilter<"User"> | Date | string | null
+    user_fee_receipt?: StringNullableFilter<"User"> | string | null
+    hostel_id?: StringFilter<"User"> | string
+    room_id?: StringNullableFilter<"User"> | string | null
+    user_image?: StringNullableFilter<"User"> | string | null
+    user_name?: StringFilter<"User"> | string
+    payment_status?: EnumPaymentStatusFilter<"User"> | $Enums.PaymentStatus
   }
 
   export type HostelCreateWithoutMasterUsersInput = {
@@ -7909,8 +7909,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserCreateNestedManyWithoutHostelInput
     rooms?: RoomCreateNestedManyWithoutHostelInput
+    users?: UserCreateNestedManyWithoutHostelInput
   }
 
   export type HostelUncheckedCreateWithoutMasterUsersInput = {
@@ -7918,8 +7918,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutHostelInput
     rooms?: RoomUncheckedCreateNestedManyWithoutHostelInput
+    users?: UserUncheckedCreateNestedManyWithoutHostelInput
   }
 
   export type HostelCreateOrConnectWithoutMasterUsersInput = {
@@ -7943,8 +7943,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutHostelNestedInput
     rooms?: RoomUpdateManyWithoutHostelNestedInput
+    users?: UserUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelUncheckedUpdateWithoutMasterUsersInput = {
@@ -7952,35 +7952,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
     rooms?: RoomUncheckedUpdateManyWithoutHostelNestedInput
-  }
-
-  export type RoomCreateWithoutUsersInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    status?: $Enums.Status
-    addedAt?: Date | string
-    modifiedAt?: Date | string
-    hostel: HostelCreateNestedOneWithoutRoomsInput
-  }
-
-  export type RoomUncheckedCreateWithoutUsersInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    hostel_id: string
-    status?: $Enums.Status
-    addedAt?: Date | string
-    modifiedAt?: Date | string
-  }
-
-  export type RoomCreateOrConnectWithoutUsersInput = {
-    where: RoomWhereUniqueInput
-    create: XOR<RoomCreateWithoutUsersInput, RoomUncheckedCreateWithoutUsersInput>
+    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelCreateWithoutUsersInput = {
@@ -7988,8 +7961,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    rooms?: RoomCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserCreateNestedManyWithoutHostelInput
+    rooms?: RoomCreateNestedManyWithoutHostelInput
   }
 
   export type HostelUncheckedCreateWithoutUsersInput = {
@@ -7997,8 +7970,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    rooms?: RoomUncheckedCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserUncheckedCreateNestedManyWithoutHostelInput
+    rooms?: RoomUncheckedCreateNestedManyWithoutHostelInput
   }
 
   export type HostelCreateOrConnectWithoutUsersInput = {
@@ -8006,37 +7979,31 @@ export namespace Prisma {
     create: XOR<HostelCreateWithoutUsersInput, HostelUncheckedCreateWithoutUsersInput>
   }
 
-  export type RoomUpsertWithoutUsersInput = {
-    update: XOR<RoomUpdateWithoutUsersInput, RoomUncheckedUpdateWithoutUsersInput>
+  export type RoomCreateWithoutUsersInput = {
+    status?: $Enums.Status
+    addedAt?: Date | string
+    modifiedAt?: Date | string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
+    hostel: HostelCreateNestedOneWithoutRoomsInput
+  }
+
+  export type RoomUncheckedCreateWithoutUsersInput = {
+    status?: $Enums.Status
+    addedAt?: Date | string
+    modifiedAt?: Date | string
+    hostel_id: string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
+  }
+
+  export type RoomCreateOrConnectWithoutUsersInput = {
+    where: RoomWhereUniqueInput
     create: XOR<RoomCreateWithoutUsersInput, RoomUncheckedCreateWithoutUsersInput>
-    where?: RoomWhereInput
-  }
-
-  export type RoomUpdateToOneWithWhereWithoutUsersInput = {
-    where?: RoomWhereInput
-    data: XOR<RoomUpdateWithoutUsersInput, RoomUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type RoomUpdateWithoutUsersInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    hostel?: HostelUpdateOneRequiredWithoutRoomsNestedInput
-  }
-
-  export type RoomUncheckedUpdateWithoutUsersInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    hostel_id?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HostelUpsertWithoutUsersInput = {
@@ -8055,8 +8022,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    rooms?: RoomUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUpdateManyWithoutHostelNestedInput
+    rooms?: RoomUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelUncheckedUpdateWithoutUsersInput = {
@@ -8064,8 +8031,41 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    rooms?: RoomUncheckedUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUncheckedUpdateManyWithoutHostelNestedInput
+    rooms?: RoomUncheckedUpdateManyWithoutHostelNestedInput
+  }
+
+  export type RoomUpsertWithoutUsersInput = {
+    update: XOR<RoomUpdateWithoutUsersInput, RoomUncheckedUpdateWithoutUsersInput>
+    create: XOR<RoomCreateWithoutUsersInput, RoomUncheckedCreateWithoutUsersInput>
+    where?: RoomWhereInput
+  }
+
+  export type RoomUpdateToOneWithWhereWithoutUsersInput = {
+    where?: RoomWhereInput
+    data: XOR<RoomUpdateWithoutUsersInput, RoomUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type RoomUpdateWithoutUsersInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
+    hostel?: HostelUpdateOneRequiredWithoutRoomsNestedInput
+  }
+
+  export type RoomUncheckedUpdateWithoutUsersInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HostelCreateWithoutRoomsInput = {
@@ -8073,8 +8073,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserCreateNestedManyWithoutHostelInput
+    users?: UserCreateNestedManyWithoutHostelInput
   }
 
   export type HostelUncheckedCreateWithoutRoomsInput = {
@@ -8082,8 +8082,8 @@ export namespace Prisma {
     name: string
     address?: string | null
     added_date_time?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutHostelInput
     masterUsers?: MasterUserUncheckedCreateNestedManyWithoutHostelInput
+    users?: UserUncheckedCreateNestedManyWithoutHostelInput
   }
 
   export type HostelCreateOrConnectWithoutRoomsInput = {
@@ -8093,38 +8093,38 @@ export namespace Prisma {
 
   export type UserCreateWithoutRoomInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
     hostel: HostelCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutRoomInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    hostel_id: string
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    hostel_id: string
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
   }
 
   export type UserCreateOrConnectWithoutRoomInput = {
@@ -8153,8 +8153,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUpdateManyWithoutHostelNestedInput
+    users?: UserUpdateManyWithoutHostelNestedInput
   }
 
   export type HostelUncheckedUpdateWithoutRoomsInput = {
@@ -8162,8 +8162,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
     masterUsers?: MasterUserUncheckedUpdateManyWithoutHostelNestedInput
+    users?: UserUncheckedUpdateManyWithoutHostelNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutRoomInput = {
@@ -8182,34 +8182,6 @@ export namespace Prisma {
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRoomInput>
   }
 
-  export type UserCreateManyHostelInput = {
-    user_id?: string
-    user_name: string
-    email?: string | null
-    mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    room_id?: string | null
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
-    status?: $Enums.Status
-    added_date_time?: Date | string
-    modified_date_time?: Date | string
-  }
-
-  export type RoomCreateManyHostelInput = {
-    room_id?: string
-    floor_number?: string | null
-    room_number: string
-    total_beds: number
-    status?: $Enums.Status
-    addedAt?: Date | string
-    modifiedAt?: Date | string
-  }
-
   export type MasterUserCreateManyHostelInput = {
     master_user_id?: string
     name: string
@@ -8221,90 +8193,32 @@ export namespace Prisma {
     modified_date_time?: Date | string
   }
 
-  export type UserUpdateWithoutHostelInput = {
-    user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    room?: RoomUpdateOneWithoutUsersNestedInput
+  export type RoomCreateManyHostelInput = {
+    status?: $Enums.Status
+    addedAt?: Date | string
+    modifiedAt?: Date | string
+    room_id?: string
+    room_number: string
+    total_beds: number
+    floor_number?: string | null
   }
 
-  export type UserUncheckedUpdateWithoutHostelInput = {
-    user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    room_id?: NullableStringFieldUpdateOperationsInput | string | null
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUncheckedUpdateManyWithoutHostelInput = {
-    user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    room_id?: NullableStringFieldUpdateOperationsInput | string | null
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RoomUpdateWithoutHostelInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutRoomNestedInput
-  }
-
-  export type RoomUncheckedUpdateWithoutHostelInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutRoomNestedInput
-  }
-
-  export type RoomUncheckedUpdateManyWithoutHostelInput = {
-    room_id?: StringFieldUpdateOperationsInput | string
-    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
-    room_number?: StringFieldUpdateOperationsInput | string
-    total_beds?: IntFieldUpdateOperationsInput | number
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserCreateManyHostelInput = {
+    user_id?: string
+    email?: string | null
+    mobile: string
+    status?: $Enums.Status
+    added_date_time?: Date | string
+    modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    room_id?: string | null
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
   }
 
   export type MasterUserUpdateWithoutHostelInput = {
@@ -8340,76 +8254,162 @@ export namespace Prisma {
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RoomUpdateWithoutHostelInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserUpdateManyWithoutRoomNestedInput
+  }
+
+  export type RoomUncheckedUpdateWithoutHostelInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserUncheckedUpdateManyWithoutRoomNestedInput
+  }
+
+  export type RoomUncheckedUpdateManyWithoutHostelInput = {
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room_id?: StringFieldUpdateOperationsInput | string
+    room_number?: StringFieldUpdateOperationsInput | string
+    total_beds?: IntFieldUpdateOperationsInput | number
+    floor_number?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpdateWithoutHostelInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mobile?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    room?: RoomUpdateOneWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHostelInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mobile?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    room_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  }
+
+  export type UserUncheckedUpdateManyWithoutHostelInput = {
+    user_id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mobile?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    room_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  }
+
   export type UserCreateManyRoomInput = {
     user_id?: string
-    user_name: string
     email?: string | null
     mobile: string
-    user_image?: string | null
-    joining_date?: Date | string
-    next_fee_date?: Date | string | null
-    monthly_fee: number
-    due_amount: number
-    hostel_id: string
-    user_fee_receipt?: string | null
-    payment_status?: $Enums.PaymentStatus
     status?: $Enums.Status
     added_date_time?: Date | string
     modified_date_time?: Date | string
+    due_amount: number
+    joining_date?: Date | string
+    monthly_fee: number
+    next_fee_date?: Date | string | null
+    user_fee_receipt?: string | null
+    hostel_id: string
+    user_image?: string | null
+    user_name: string
+    payment_status?: $Enums.PaymentStatus
   }
 
   export type UserUpdateWithoutRoomInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     hostel?: HostelUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoomInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    hostel_id?: StringFieldUpdateOperationsInput | string
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   }
 
   export type UserUncheckedUpdateManyWithoutRoomInput = {
     user_id?: StringFieldUpdateOperationsInput | string
-    user_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mobile?: StringFieldUpdateOperationsInput | string
-    user_image?: NullableStringFieldUpdateOperationsInput | string | null
-    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    monthly_fee?: IntFieldUpdateOperationsInput | number
-    due_amount?: IntFieldUpdateOperationsInput | number
-    hostel_id?: StringFieldUpdateOperationsInput | string
-    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     added_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
     modified_date_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_amount?: IntFieldUpdateOperationsInput | number
+    joining_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    monthly_fee?: IntFieldUpdateOperationsInput | number
+    next_fee_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_fee_receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    hostel_id?: StringFieldUpdateOperationsInput | string
+    user_image?: NullableStringFieldUpdateOperationsInput | string | null
+    user_name?: StringFieldUpdateOperationsInput | string
+    payment_status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   }
 
 
