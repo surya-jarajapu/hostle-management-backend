@@ -51,7 +51,7 @@ export type MasterUserQueryDTO = z.infer<typeof MasterUserQuerySchema>;
 export class MasterUserController {
   constructor(private readonly _service: MasterUserService) {}
 
-@UseGuards(AuthGuard('jwt')) // 👈 REQUIRED
+// @UseGuards(AuthGuard('jwt')) // 👈 REQUIRED
 @Post()
 create(
   @Body(new GlobalZodValidationPipe(MasterUserSchema)) dto: MasterUserDTO,
